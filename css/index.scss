@@ -1,0 +1,256 @@
+body{
+  overflow: hidden;
+}
+#app{
+  width: 100%;
+  height: 100%;
+}
+#homepage{
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  background: url("../img/index1.png") no-repeat left top;
+  -webkit-background-size: 100% 100%;
+  background-size: 100% 100%;
+  .pg0{
+    position: absolute;
+    left: 0%;
+    bottom: 0%;
+    width: 100%;
+    img{
+      width: 100%;
+      animation: 1.6s bling linear infinite;
+    }
+  }
+  .pg1{
+    position: absolute;
+    left: 10%;
+    top: 7.46%;
+    width: 80.52%;
+    z-index: 2;
+    img{
+      width: 100%;
+      animation: 2s bigAndSmall linear infinite;
+    }
+  }
+  .pg2{
+    position: absolute;
+    left: 0%;
+    top: 0%;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    display: -webkit-flex;
+    -webkit-align-items: center;
+    -webkit-justify-content: center;
+    -webkit-flex-direction: column;
+    z-index:3;
+    img{
+      width: 74.4%;
+      margin-top: 12%;
+    }
+  }
+  .pg3{
+    position: absolute;
+    left: 15.33%;
+    bottom: 19%;
+    width: 69.34%;
+    z-index: 5;
+    img{
+      width: 100%;
+      animation: 1.0s bigAndSmall linear infinite;
+    }
+  }
+  .pg4{
+    position: absolute;
+    left: 8.45%;
+    bottom: 9%;
+    width: 40%;
+    img{
+      width: 100%;
+    }
+  }
+  .pg5{
+    position: absolute;
+    right: 8.45%;
+    bottom: 9%;
+    width: 40%;
+    img{
+      width: 100%;
+    }
+  }
+  .pg6{
+    position: absolute;
+    width: 16.7%;
+    left: -7%;
+    top: 12%;
+    img{
+      width: 100%;
+      animation: 8.0s move3 linear infinite;
+    }
+  }
+  .pg7 {
+    position: absolute;
+    width: 29.47%;
+    left: 34%;
+    top: 9%;
+    img {
+      width: 100%;
+      animation: 5.0s move1 linear infinite;
+    }
+  }
+  .pg8{
+    position: absolute;
+    width: 18.93%;
+    right: -10%;
+    top: 3%;
+    img{
+      width: 100%;
+      animation: 6.0s move2 linear infinite;
+    }
+  }
+  .pg9{
+    position: absolute;
+    width: 56.14%;
+    left: 21.93%;
+    top: 18%;
+    img{
+      width: 100%;
+    }
+  }
+}
+@keyframes move1{
+  0%{
+    transform: matrix(1,0,0,1,0,0);
+  }
+  10%{
+     transform: matrix(0.984808,0.173648,-0.173648,0.984808,8,-8);
+   }
+  20%{
+    transform: matrix(1,0,0,1,16,-16);
+  }
+  30%{
+    transform: matrix(0.984808,0.173648,-0.173648,0.984808,24,-24);
+  }
+  40%{
+    transform: matrix(1,0,0,1,32,-32);
+  }
+  50%{
+    transform: matrix(0.984808,0.173648,-0.173648,0.984808,40,-40);
+  }
+  60%{
+    transform: matrix(1,0,0,1,32,-32);
+  }
+  70%{
+    transform: matrix(0.984808,0.173648,-0.173648,0.984808,24,-24);
+  }
+  80%{
+    transform: matrix(1,0,0,1,16,-16);
+  }
+  90%{
+    transform: matrix(0.984808,0.173648,-0.173648,0.984808,8,-8);
+  }
+  100%{
+    transform: matrix(1,0,0,1,0,0);
+  }
+}
+@keyframes move2{
+
+  0%{
+    transform: matrix(1,0,0,1,0,0);
+  }
+  10%{
+    transform: matrix(0.984808,0.173648,-0.173648,0.984808,-8,8);
+  }
+  20%{
+    transform: matrix(1,0,0,1,-16,16);
+  }
+  30%{
+    transform: matrix(0.984808,0.173648,-0.173648,0.984808,-24,24);
+  }
+  40%{
+    transform: matrix(1,0,0,1,-32,32);
+  }
+  50%{
+    transform: matrix(0.984808,0.173648,-0.173648,0.984808,-40,40);
+  }
+  60%{
+    transform: matrix(1,0,0,1,-32,32);
+  }
+  70%{
+    transform: matrix(0.984808,0.173648,-0.173648,0.984808,-24,24);
+  }
+  80%{
+    transform: matrix(1,0,0,1,-16,16);
+  }
+  90%{
+    transform: matrix(0.984808,0.173648,-0.173648,0.984808,-8,8);
+  }
+  100%{
+    transform: matrix(1,0,0,1,0,0);
+  }
+}
+@keyframes move3{
+
+  0%{
+    transform: matrix(1,0,0,1,0,0);
+  }
+  10%{
+    transform: matrix(0.984808,0.173648,-0.173648,0.984808,10,10);
+  }
+  20%{
+    transform: matrix(1,0,0,1,20,20);
+  }
+  30%{
+    transform: matrix(0.984808,0.173648,-0.173648,0.984808,30,30);
+  }
+  40%{
+    transform: matrix(1,0,0,1,40,40);
+  }
+  50%{
+    transform: matrix(0.984808,0.173648,-0.173648,0.984808,50,50);
+  }
+  60%{
+    transform: matrix(1,0,0,1,40,40);
+  }
+  70%{
+    transform: matrix(0.984808,0.173648,-0.173648,0.984808,30,30);
+  }
+  80%{
+    transform: matrix(1,0,0,1,20,20);
+  }
+  90%{
+    transform: matrix(0.984808,0.173648,-0.173648,0.984808,10,10);
+  }
+  100%{
+    transform: matrix(1,0,0,1,0,0);
+  }
+}
+@keyframes bigAndSmall{
+  0%{
+    transform: matrix(1,0,0,1,0,0);
+  }
+  50%{
+    transform: matrix(0.95,0,0,0.95,0,0);
+  }
+  100%{
+    transform: matrix(1,0,0,1,0,0);
+  }
+}
+@keyframes bling {
+  0%{
+    opacity: 1;
+  }
+  50%{
+    opacity: 0.75;
+  }
+  100%{
+    opacity: 1;
+  }
+}

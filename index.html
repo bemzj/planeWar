@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>飞机大战</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+		<meta content="yes" name="apple-mobile-web-app-capable"/>
+		<meta content="black" name="apple-mobile-web-app-status-bar-style"/>
+		<meta content="telephone=no" name="format-detection"/>
+		<link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet">
+		<link rel="stylesheet" href="css/reset.css" />
+		<link rel="stylesheet" href="css/index.css"/>
+		<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+		<script type="text/javascript" src="js/lufylegend-1.10.1.min.js" ></script>
+		<script src="js/vue.js"></script>
+	</head>
+	<body>
+		<div class="delete1">
+		<div id="app">
+			<div id="homepage" v-if="pageIndex==1">
+				<div class="pg0">
+					<img src="img/index8.png" class="img" />
+				</div>
+				<div class="pg1 animated bounceInDown" >
+					<img src="img/index2.png" class="img" />
+				</div>
+				<div class="pg2  animated bounceIn">
+					<img src="img/index7.png" class="img" />
+				</div>
+				<a href="###" class="pg3  animated fadeInDown" @touchStart="startBtn">
+					<img src="img/indexBtn3.png" />
+				</a>
+				<a href="###" class="pg5  animated fadeInLeft">
+					<img src="img/indexBtn1.png" />
+				</a>
+				<a href="###" class="pg4  animated fadeInRight">
+					<img src="img/indexBtn2.png" />
+				</a>
+				<div class="pg6">
+					<img src="img/index6.png" class="img" />
+				</div>
+				<div class="pg7">
+					<img src="img/index4.png" class="img" />
+				</div>
+				<div class="pg8">
+					<img src="img/index5.png" class="img" />
+				</div>
+				<div class="pg9  animated bounceIn">
+					<img src="img/index3.png" class="img" />
+				</div>
+			</div>
+		</div>
+		<audio id="bomb" src="music/bomb.mp3" hidden="hidden" preload ></audio>
+		<div id="plane"></div>
+		<script>
+            $('.img').on('click',function () {
+				return false;
+            })
+		</script>
+		<script  type="text/javascript" src="js/main.js"></script>
+		<script  type="text/javascript" src="js/class.js"></script>
+		<script  type="text/javascript" src="js/bemGame.js"></script>
+		<script  type="text/javascript" src="js/resource.js"></script>
+		<script>
+            //微信加入聊天
+            function audioAutoPlay(id,v){
+                var audio = document.getElementById(id);
+                audio.play();
+                if(v==0)
+                {
+                    audio.pause();
+                }
+                document.addEventListener("WeixinJSBridgeReady", function () {
+                    audio.play();
+                    if(v==0)
+                    {
+                        audio.pause();
+                    }
+                }, false);
+            }
+            //数据对接
+            var app =  new Vue({
+                el: '#app',
+                data: {
+                    pageIndex:1
+				},
+                methods:{
+                    startBtn(){
+                        var self = this;
+                        self.pageIndex = 2;
+						gameStart();
+					}
+				}
+            });
+            audioAutoPlay('bomb',0);
+		</script>
+		<div class="delete2"></div>
+	</body>
+</html>
