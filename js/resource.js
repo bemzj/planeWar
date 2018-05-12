@@ -40,6 +40,24 @@ var imgAll = [
     {path:url+'img/magic3.png',type:'img',name:'magic3'},//加强弹
     {path:url+'img/magic4.png',type:'img',name:'magic4'},//清屏
     {path:url+'img/boss.png',type:'img',name:'boss'},//boss
+    {path:url+'img/rule1.png',type:'img',name:'rule1'},//规则1
+    {path:url+'img/rule2.png',type:'img',name:'rule2'},//规则2
+    {path:url+'img/gback.png',type:'img',name:'gback'},//礼物背景
+    {path:url+'img/gift1.png',type:'img',name:'gift1'},//礼物1
+    {path:url+'img/gift2.png',type:'img',name:'gift2'},//礼物2
+    {path:url+'img/gift3.png',type:'img',name:'gift3'},//礼物3
+    {path:url+'img/gift4.png',type:'img',name:'gift4'},//礼物4
+    {path:url+'img/gift5.png',type:'img',name:'gift5'},//礼物5
+    {path:url+'img/gift6.png',type:'img',name:'gift6'},//礼物6
+    {path:url+'img/gift7.png',type:'img',name:'gift7'},//礼物7
+    {path:url+'img/gift8.png',type:'img',name:'gift8'},//礼物8
+    {path:url+'img/address1.png',type:'img',name:'address1'},//地址1
+    {path:url+'img/address2.png',type:'img',name:'address2'},//地址2
+    {path:url+'img/address3.png',type:'img',name:'address3'},//地址3
+    {path:url+'img/pop.png',type:'img',name:'pop'},//弹窗
+    {path:url+'img/pop1.png',type:'img',name:'pop1'},//弹窗1
+    {path:url+'img/pop2.png',type:'img',name:'pop2'},//弹窗2
+    {path:url+'img/pop3.png',type:'img',name:'pop3'},//弹窗2
 ];
 //游戏初始化
 LInit(1000 / 40, "plane", 750, 1206, main);

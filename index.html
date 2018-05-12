@@ -10,6 +10,25 @@
 		<link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet">
 		<link rel="stylesheet" href="css/reset.css" />
 		<link rel="stylesheet" href="css/index.css"/>
+		<script>
+            (function(doc, win) {
+                var docEl = doc.documentElement,
+                    resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+                    recalc = function() {
+                        var clientWidth = docEl.clientWidth;
+                        if(!clientWidth) return;
+                        if(clientWidth >= 750) {
+                            docEl.style.fontSize = '100px';
+                        } else {
+                            docEl.style.fontSize = 100 * (clientWidth / 750) + 'px';
+                        }
+                    };
+
+                if(!doc.addEventListener) return;
+                win.addEventListener(resizeEvt, recalc, false);
+                doc.addEventListener('DOMContentLoaded', recalc, false);
+            })(document, window);
+		</script>
 		<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
 		<script type="text/javascript" src="js/lufylegend-1.10.1.min.js" ></script>
 		<script src="js/vue.js"></script>
@@ -30,10 +49,10 @@
 				<a href="###" class="pg3  animated fadeInDown" @touchStart="startBtn">
 					<img src="img/indexBtn3.png" />
 				</a>
-				<a href="###" class="pg5  animated fadeInLeft">
+				<a href="###" class="pg5  animated fadeInLeft" @touchStart="pageIndex=2">
 					<img src="img/indexBtn1.png" />
 				</a>
-				<a href="###" class="pg4  animated fadeInRight">
+				<a href="###" class="pg4  animated fadeInRight" @touchStart="showRules">
 					<img src="img/indexBtn2.png" />
 				</a>
 				<div class="pg6">
@@ -49,19 +68,73 @@
 					<img src="img/index3.png" class="img" />
 				</div>
 			</div>
+			<!--我的礼品和积分商城-->
+			<div id="giftAndShop" class="pw" v-if="pageIndex==2">
+				<div class="myScore">
+					<img src="img/gift1.png"/>
+					<div class="sText">
+						<p>{{wxScore}}</p>
+					</div>
+				</div>
+				<div class="gsButton">
+					<img v-if="giftShopIndex==0" src="img/gift2.png"/>
+					<img v-else="giftShopIndex==1" src="img/gift8.png"/>
+					<button class="showGift" @touchStart="giftShopIndex=0"></button>
+					<button class="showShop" @touchStart="giftShopIndex=1"></button>
+				</div>
+				<div class="giftBox">
+					<img src="img/gift3.png"  class="img"/>
+					<!--我的礼品-->
+					<div class="giftArea" :class="{noGift:mygifts.length==0}" v-if="giftShopIndex==0">
+						<div class="mgBox" v-for="(item, index) in mygifts">
+							<div class="mgleft">
+								<img :src="item.giftSrc"  class="img"/>
+							</div>
+							<div class="mgRight">
+								<p>{{item.content}}</p>
+							</div>
+							<a href="###" v-if="item.status==0" @touchStart="addressShow=1,giftIndex=0"><img src="img/gift6.png"/></a>
+							<a href="###" v-else="item.status==1"><img src="img/gift7.png" @touchStart="lookDetails(mygifts[index].giftSrc,mygifts[index].content,mygifts[index].name,mygifts[index].phone,mygifts[index].address,mygifts[index].msg)"/></a>
+						</div>
+					</div>
+					<!--积分商城-->
+					<div class="giftArea"  v-if="giftShopIndex==1">
+						<div class="mgBox" v-for="(item, index) in allGifts">
+							<div class="mgleft">
+								<img :src="item.giftSrc"  class="img"/>
+							</div>
+							<div class="mgRight">
+								<p>{{item.content}}</p>
+								<p>兑换积分：{{item.giftscore}}</p>
+								<p>剩余数量：{{item.giftNumber}}</p>
+							</div>
+							<a href="###" v-if="item.giftNumber>0"  @touchStart="addressShow=1,giftIndex=1"><img src="img/gift9.png"/></a>
+						</div>
+					</div>
+
+				</div>
+				<a herf="###" class="backHome"><img src="img/gift10.png" @touchStart="pageIndex=1"/> </a>
+			</div>
+			<!--显示-->
+			<iframe src="address.html" id="addressFrame" class="pw" v-if="addressShow==1"></iframe>
+			<div id="plane"></div>
 		</div>
+
 		<audio id="bomb" src="music/bomb.mp3" hidden="hidden" preload ></audio>
-		<div id="plane"></div>
+
 		<script>
             $('.img').on('click',function () {
 				return false;
             })
+
 		</script>
+		<script  type="text/javascript" src="js/resource.js"></script>
+		<script  type="text/javascript" src="js/popWin.js"></script>
 		<script  type="text/javascript" src="js/main.js"></script>
 		<script  type="text/javascript" src="js/class.js"></script>
 		<script  type="text/javascript" src="js/bemGame.js"></script>
-		<script  type="text/javascript" src="js/resource.js"></script>
 		<script>
+            // showPop(2,"");
             //微信加入聊天
             function audioAutoPlay(id,v){
                 var audio = document.getElementById(id);
@@ -82,14 +155,85 @@
             var app =  new Vue({
                 el: '#app',
                 data: {
-                    pageIndex:1
+                    addressShow:0,//显示填写地址弹窗
+                    pageIndex:2,//页面
+					wxScore:100000,
+					giftShopIndex:0,//默认我的礼品页面
+					giftIndex:0,
+					mygifts:[{
+                        "giftSrc":"img/gift5.png",
+						"content":"价值XX元的抱枕",
+						"status":0
+					},{
+                        "giftSrc":"img/gift5.png",										//礼品图片路径
+                        "content":"价值XX元的抱枕,价值XX元的抱枕",							//礼品名称
+                        "status":1,														//领取状态 0为未领取 1为已领取转变为查看状态
+						"name":"邱梓佳",													//姓名
+						"phone":"15999911956",											//电话
+						"address":"广州市海珠区琶洲新村蟠龙新街琶洲街道11栋710恒帝科技",		//地址
+						"msg":"广州市海珠区"												//留言
+					}],
+                    allGifts:[{
+                        "giftSrc":"img/gift5.png",				//商城礼品图片路径
+                        "content":"价值XX元的抱枕",				//商城礼品名称
+                        "giftscore":200000,						//商城积分
+						"giftNumber":1000						//剩余数量
+                    },{
+                        "giftSrc":"img/gift5.png",				//商城礼品图片路径
+                        "content":"价值XX元的抱枕，价值XX元",				//商城礼品名称
+                        "giftscore":200000,						//商城积分
+                        "giftNumber":1000						//剩余数量
+                    }]
 				},
                 methods:{
+                    //开始游戏
                     startBtn(){
                         var self = this;
                         self.pageIndex = 2;
 						gameStart();
+					},
+                    //显示规则
+                    showRules(){
+						$('#rule').remove();
+						var html = "";
+						html += '<div id="rule" class="pw mask">';
+						html += '<div class="rule1 animated fadeInDown">';
+						html += '<img src='+url+'"img/rule2.png" class="img"/><div class="ruleTitle">';
+						html += '<img src='+url+'"img/rule1.png" /></div></div><a href="###" class="closeRule animated fadeInUp"><img src="img/close.png"/></a></div>';
+						$('body').append(html);
+						$('#rule .closeRule').on('touchstart',function () {
+                            $('#rule .rule1').removeClass('animated fadeInDown');
+							$('#rule .rule1').addClass('animated bounceOut');
+                            $('#rule .closeRule').addClass('animated fadeOutDown');
+                            setTimeout(function () {
+                                $('#rule').remove();
+                            },900);
+                        });
+					},
+					//查看详情
+					lookDetails(src,content,name,phone,address,msg){
+                        $('#lookAddress').remove();
+                        var html = "";
+                        html += '<div id="lookAddress" class="pw mask"><div class="lookAddress animated bounceInDown"><img src="img/person.png" />';
+                        html += '<div><ul><li class="liImg"><img src="'+src+'"/></li>';
+                        html += '<li class="giftContent"><p>'+content+'</p></li>';
+                        html += '<li class="liTitle"><img src="img/person1.png"/></li>';
+                        html += '<li><p>姓名：'+name+'</p></li>';
+                        html += '<li><p>手机：'+phone+'</p></li>';
+                        html += '<li><p>地址：'+address+'</p></li>';
+                        html += '<li><p>留言：'+msg+'</p></li>';
+                        html += '<li class="tips"><p>注：活动结束后礼品由总部统一，请注意查收！</p></li></ul></div></div>';
+                        html += '<a href="###" class="closeLook animated fadeInUp"><img src="img/close.png"/></a></div>';
+                        $('body').append(html);
+                        $('#lookAddress .closeLook').on('touchstart',function () {
+                            $('#lookAddress .lookAddress').addClass('animated bounceOut');
+                            $('#lookAddress .closeLook').addClass('animated fadeOutDown');
+                            setTimeout(function () {
+                                $('#lookAddress').remove();
+                            },900);
+                        });
 					}
+
 				}
             });
             audioAutoPlay('bomb',0);

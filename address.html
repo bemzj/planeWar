@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta content="yes" name="apple-mobile-web-app-capable"/>
+    <meta content="black" name="apple-mobile-web-app-status-bar-style"/>
+    <meta content="telephone=no" name="format-detection"/>
+    <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/demo.css" />
+    <link rel="stylesheet" href="css/ydui.css" />
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/index.css"/>
+    <script>
+        (function(doc, win) {
+            var docEl = doc.documentElement,
+                resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+                recalc = function() {
+                    var clientWidth = docEl.clientWidth;
+                    if(!clientWidth) return;
+                    if(clientWidth >= 750) {
+                        docEl.style.fontSize = '100px';
+                    } else {
+                        docEl.style.fontSize = 100 * (clientWidth / 750) + 'px';
+                    }
+                };
+
+            if(!doc.addEventListener) return;
+            win.addEventListener(resizeEvt, recalc, false);
+            doc.addEventListener('DOMContentLoaded', recalc, false);
+        })(document, window);
+    </script>
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <script src="js/popWin.js"></script>
+</head>
+<body style="background-color: transparent">
+    <div id="address" class="pw mask">
+        <div class="address">
+            <img src="img/address3.png" class="img"/>
+            <div class="addressIn">
+                <div class="addressTitle">
+                    <img src="img/address1.png" class="img"/>
+                </div>
+                <ul>
+                    <li>
+                        <input type="text" placeholder="请输入您的姓名"/>
+                    </li>
+                    <li>
+                        <input type="text" placeholder="请输入您的手机号码"/>
+                    </li>
+                    <li>
+                        <input type="text" placeholder="请选择省市区" id="city"/>
+                    </li>
+                    <li class="textArea">
+                        <div>
+                            <textarea  placeholder="请输入详细地址"></textarea>
+                        </div>
+                    </li>
+                    <li class="textArea">
+                        <div>
+                            <textarea  placeholder="请输入120字内的内容"></textarea>
+                        </div>
+                    </li>
+
+                </ul>
+                <a herf="###" class="submitAddress"><img src="img/address2.png"/></a>
+            </div>
+        </div>
+        <a href="###" class="closeAddress">
+            <img src="img/close.png"/>
+        </a>
+    </div>
+    <script type="text/javascript" src="js/ydui.citys.js"></script>
+    <script type="text/javascript" src="js/ydui.js"></script>
+    <script type="text/javascript">
+        //选择省市区
+        !function () {
+            var $target = $('#city');
+
+            $target.citySelect();
+
+            $target.on('click', function (event) {
+                event.stopPropagation();
+                $target.citySelect('open');
+            });
+
+            $target.on('done.ydui.cityselect', function (ret) {
+                $(this).val(ret.provance + ' ' + ret.city + ' ' + ret.area);
+            });
+        }();
+        //失去焦点避免软键盘弹出
+        $('#city').blur();
+        //提交
+        $('.submitAddress').on('click',function () {
+            showPop(2,"请您认真核对信息，如信息填写有误，将无法领取奖品！",function () {
+
+                showPop(1,"收货信息已提交！<br/>请您耐心等待，谢谢！",function () {
+                    window.parent.app.addressShow= 0;
+                });
+
+
+
+
+            });
+        });
+        $('.closeAddress').on('click',function () {
+            window.parent.app.addressShow= 0;
+        });
+    </script>
+</body>
+</html>

@@ -243,7 +243,7 @@ function Boss(x,y) {
 	self.addChild(self.bitmap);
 	self.hit = new LSprite();
     self.addChild(self.hit);
-    self.hit.addShape(LShape.VERTICES,[[0, 120],[56, 45], [120, 0], [208, 0], [320, 93], [320, 185],[300, 290], [280, 320], [215, 320], [90, 294],[50, 200],[0, 150]]);
+    self.hit.addShape(LShape.ARC,[160,150,140]);
 
 
 }

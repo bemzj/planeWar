@@ -1,3 +1,4 @@
+@charset "UTF-8";
 body {
   overflow: hidden; }
 
@@ -63,14 +64,16 @@ body {
     position: absolute;
     left: 8.45%;
     bottom: 9%;
-    width: 40%; }
+    width: 40%;
+    z-index: 5; }
     #homepage .pg4 img {
       width: 100%; }
   #homepage .pg5 {
     position: absolute;
     right: 8.45%;
     bottom: 9%;
-    width: 40%; }
+    width: 40%;
+    z-index: 5; }
     #homepage .pg5 img {
       width: 100%; }
   #homepage .pg6 {
@@ -188,5 +191,336 @@ body {
     opacity: 0.75; }
   100% {
     opacity: 1; } }
+.pw {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  display: -webkit-flex;
+  -webkit-align-items: center;
+  -webkit-justify-content: center;
+  -webkit-flex-direction: column; }
+
+.mask {
+  background-color: rgba(0, 0, 0, 0.75);
+  z-index: 10; }
+
+#rule .rule1 {
+  width: 83.6%;
+  position: relative; }
+  #rule .rule1 .ruleTitle {
+    position: absolute;
+    top: -2%;
+    left: 31.26%;
+    width: 37.48%; }
+#rule img {
+  width: 100%; }
+#rule .closeRule {
+  width: 9.3%;
+  margin-top: 0.4rem; }
+
+#giftAndShop {
+  z-index: 10;
+  background: url("../img/gback.png") no-repeat left top;
+  -webkit-background-size: 100% 100%;
+  background-size: 100% 100%; }
+  #giftAndShop .gsButton {
+    margin-top: 0.4rem;
+    width: 87%;
+    position: relative; }
+    #giftAndShop .gsButton button {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 50%;
+      height: 100%;
+      display: block;
+      opacity: 0; }
+    #giftAndShop .gsButton .showShop {
+      right: 0;
+      left: auto; }
+  #giftAndShop img {
+    width: 100%; }
+  #giftAndShop .giftBox {
+    margin-top: 0.4rem;
+    width: 87%;
+    position: relative; }
+    #giftAndShop .giftBox .giftArea {
+      position: absolute;
+      top: 4%;
+      left: 4%;
+      width: 92%;
+      height: 92%;
+      overflow-y: scroll;
+      -webkit-overflow-scrolling: touch; }
+      #giftAndShop .giftBox .giftArea .mgBox {
+        width: 100%;
+        background-color: white;
+        position: relative;
+        border-radius: 0.16rem;
+        margin-bottom: 0.2rem; }
+        #giftAndShop .giftBox .giftArea .mgBox .mgleft {
+          width: 1.7rem;
+          height: 1.55rem;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          flex-direction: column;
+          display: -webkit-flex;
+          -webkit-align-items: center;
+          -webkit-justify-content: center;
+          -webkit-flex-direction: column;
+          padding: 0.2rem;
+          box-sizing: content-box; }
+          #giftAndShop .giftBox .giftArea .mgBox .mgleft img {
+            width: auto;
+            max-width: 100%;
+            max-height: 100%; }
+        #giftAndShop .giftBox .giftArea .mgBox .mgRight {
+          position: absolute;
+          left: 2rem;
+          top: 0;
+          height: 100%;
+          width: 40%;
+          font-size: 0.3rem;
+          color: #333333;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          flex-direction: column;
+          display: -webkit-flex;
+          -webkit-align-items: center;
+          -webkit-justify-content: center;
+          -webkit-flex-direction: column; }
+          #giftAndShop .giftBox .giftArea .mgBox .mgRight p {
+            width: 100%; }
+          #giftAndShop .giftBox .giftArea .mgBox .mgRight p:nth-child(2) {
+            font-size: 0.26rem; }
+          #giftAndShop .giftBox .giftArea .mgBox .mgRight p:nth-child(3) {
+            font-size: 0.26rem; }
+        #giftAndShop .giftBox .giftArea .mgBox a {
+          width: 22%;
+          position: absolute;
+          right: 0.2rem;
+          bottom: 0.2rem; }
+      #giftAndShop .giftBox .giftArea .mgBox:nth-last-child(1) {
+        margin-bottom: 0; }
+    #giftAndShop .giftBox .noGift {
+      background: url("../img/gift4.png") center center no-repeat;
+      -webkit-background-size: 60% auto;
+      background-size: 60% auto; }
+  #giftAndShop .backHome {
+    display: block;
+    margin: 0 auto;
+    margin-top: 0.4rem;
+    width: 36%; }
+  #giftAndShop .myScore {
+    position: absolute;
+    width: 29%;
+    right: 6.5%;
+    top: 1.5%; }
+    #giftAndShop .myScore > div {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      display: -webkit-flex;
+      -webkit-align-items: center;
+      -webkit-justify-content: center;
+      -webkit-flex-direction: column; }
+    #giftAndShop .myScore p {
+      font-size: 0.32rem;
+      color: white;
+      width: 70%;
+      margin-left: 30%; }
+
+#address .address {
+  width: 79.6%;
+  position: relative; }
+  #address .address .addressIn {
+    position: absolute;
+    top: 4%;
+    left: 4%;
+    width: 92%;
+    height: 92%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    display: -webkit-flex;
+    -webkit-align-items: center;
+    -webkit-justify-content: center;
+    -webkit-flex-direction: column; }
+    #address .address .addressIn ul {
+      width: 60%;
+      padding-left: 0.9rem; }
+    #address .address .addressIn ul li {
+      font-size: 0.28rem;
+      height: 0.55rem;
+      width: 100%;
+      position: relative;
+      background-color: #f1f1f1;
+      margin-bottom: 0.2rem; }
+      #address .address .addressIn ul li input {
+        display: block;
+        border: 0;
+        outline: 0;
+        height: 100%;
+        width: 92%;
+        margin: 0 auto;
+        background-color: transparent;
+        font-size: 0.26rem; }
+    #address .address .addressIn ul li::before {
+      content: "姓名：";
+      position: absolute;
+      line-height: 0.55rem;
+      width: 2.0rem;
+      right: 102%;
+      text-align: right;
+      top: 0; }
+    #address .address .addressIn ul li:nth-child(2)::before {
+      content: "手机："; }
+    #address .address .addressIn ul li:nth-child(3)::before {
+      content: "城市："; }
+    #address .address .addressIn ul li:nth-child(4)::before {
+      content: "地址："; }
+    #address .address .addressIn ul li:nth-child(5)::before {
+      content: "留言："; }
+    #address .address .addressIn ul li.textArea {
+      height: 1.2rem; }
+      #address .address .addressIn ul li.textArea > div {
+        padding: 0.15rem;
+        line-height: 0.45rem;
+        width: 100%;
+        height: 100%;
+        box-sizing: border-box; }
+        #address .address .addressIn ul li.textArea > div textarea {
+          width: 100%;
+          height: 100%;
+          border: 0px;
+          resize: none;
+          font-size: 0.26rem;
+          background-color: transparent; }
+    #address .address .addressIn .submitAddress {
+      width: 50%;
+      margin-top: 0.2rem; }
+#address img {
+  width: 100%; }
+#address .closeAddress {
+  width: 9.3%;
+  margin-top: 0.4rem; }
+#address .addressTitle {
+  width: 61%;
+  margin-bottom: 0.4rem; }
+
+#addressFrame {
+  z-index: 100;
+  border: 0;
+  outline: 0; }
+
+#popWin {
+  z-index: 999; }
+  #popWin .popWin {
+    width: 73.46%;
+    position: relative; }
+    #popWin .popWin .popWinIn {
+      width: 92%;
+      height: 92%;
+      position: absolute;
+      top: 4%;
+      left: 4%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      display: -webkit-flex;
+      -webkit-align-items: center;
+      -webkit-justify-content: center;
+      -webkit-flex-direction: column; }
+      #popWin .popWin .popWinIn .popWinTitle {
+        width: 44%; }
+      #popWin .popWin .popWinIn .popWinContenr {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        display: -webkit-flex;
+        -webkit-align-items: center;
+        -webkit-justify-content: center;
+        -webkit-flex-direction: column;
+        width: 76%;
+        margin: 0.2rem 0;
+        height: 40%;
+        line-height: 0.5rem;
+        font-size: 0.28rem;
+        text-align: center; }
+      #popWin .popWin .popWinIn .popTwoBtn {
+        width: 80%; }
+        #popWin .popWin .popWinIn .popTwoBtn > a {
+          display: block;
+          width: 45%; }
+      #popWin .popWin .popWinIn .popOneBtn {
+        width: 80%; }
+        #popWin .popWin .popWinIn .popOneBtn > a {
+          display: block;
+          width: 50%;
+          margin-left: 25%; }
+  #popWin img {
+    width: 100%; }
+  #popWin .closePop {
+    width: 9.3%;
+    margin-top: 0.4rem; }
+
+#lookAddress .lookAddress {
+  width: 73.47%;
+  position: relative; }
+  #lookAddress .lookAddress > div {
+    position: absolute;
+    width: 92%;
+    height: 86%;
+    left: 4%;
+    top: 7%;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch; }
+    #lookAddress .lookAddress > div li {
+      width: 72%;
+      margin: 0 auto;
+      font-size: 0.24rem;
+      line-height: 0.5rem;
+      color: #333333;
+      text-align: justify; }
+    #lookAddress .lookAddress > div .liImg {
+      width: 44%;
+      margin: 0 auto; }
+    #lookAddress .lookAddress > div .giftContent {
+      width: 90%;
+      font-size: 0.3rem;
+      text-align: center;
+      margin: 0.2rem auto;
+      color: #333333; }
+    #lookAddress .lookAddress > div .liTitle {
+      width: 50%;
+      margin: 0 auto 0.2rem; }
+    #lookAddress .lookAddress > div .tips {
+      width: 90%;
+      text-align: center;
+      font-size: 0.2rem;
+      color: #333333;
+      margin-top: 0.1rem;
+      line-height: 0.32rem; }
+#lookAddress img {
+  width: 100%; }
+#lookAddress .closeLook {
+  width: 9.3%;
+  margin-top: 0.4rem; }
 
 /*# sourceMappingURL=index.css.map */
