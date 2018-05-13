@@ -160,3 +160,39 @@ function getGameGift(){
 		},900);
 	});
 }
+//游戏提示
+function gameTips(){
+	$('#gameRule').remove();
+	var html = "";
+	html += '<div id="gameRule" class="pw mask">';
+	html += '<div class="timeCount pw" style="display: none;"><p>3</p></div>';
+	html += '<div class="gameRule animated fadeInDown">';
+	html += '<img src="img/gameRule.png" class="img"/></div>';
+	html += '<a href="###" class="closeGameRule animated fadeInUp"><img src="img/close.png" /></a></div>';
+	$('body').append(html);
+	$('#gameRule .closeGameRule').one('touchstart',function () {
+                $('#gameRule .gameRule').removeClass('animated fadeInDown');
+				$('#gameRule .gameRule').addClass('animated bounceOut');
+                $('#gameRule .closeGameRule').addClass('animated fadeOutDown');
+                setTimeout(function () { 
+                	var tNumber = 3;
+                    $('#gameRule .timeCount').show().addClass('tFrame');
+                    var time = setInterval(function(){ 	
+                    	--tNumber;
+                    	if(tNumber==0)
+                    	{
+                    		$('#gameRule .timeCount').find('p').text('GO');
+                    	}else if(tNumber==-1)
+                    	{
+                    		clearInterval(time);
+                    		$('#gameRule .timeCount').show().removeClass('tFrame')
+                    		$('#gameRule').remove();
+                    		GameOpen=true;
+                  
+                    	}else{
+                    		$('#gameRule .timeCount').find('p').text(tNumber);
+                    	}
+                	},1000);
+                },900);
+            });
+}

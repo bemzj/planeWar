@@ -36,6 +36,21 @@
 	<body>
 		<div class="delete1">
 		<div id="app">
+			<!--加载页-->
+			<div id="loading" v-if="pageIndex==0">
+				<img src="img/loadBkg.png" />
+				<div class="loading">
+					<div class="load1">
+						<img src="img/load1.png" />
+					</div>
+					<div class="load2">
+						<div></div>
+					</div>
+					<div class="load3">
+						<p>0%</p>
+					</div>
+				</div>
+			</div>
 			<!--首页-->
 			<div id="homepage" v-if="pageIndex==1">
 				<div class="pg0">
@@ -162,7 +177,7 @@
                 	links:"https://www.baidu.com/",
                 	awardIndex:0,
                     addressShow:0,//显示填写地址弹窗
-                    pageIndex:1,//0为加载页 1为首页 2积分商城+我的礼品 3为游戏页6为摇奖页面
+                    pageIndex:0,//0为加载页 1为首页 2积分商城+我的礼品 3为游戏页6为摇奖页面
 					wxScore:100000,
 					giftShopIndex:0,//默认我的礼品页面
 					giftIndex:0,
@@ -195,8 +210,9 @@
                     //开始游戏
                     startBtn(){
                         var self = this;
-                        self.pageIndex = 2;
+                        self.pageIndex = 3;
 						gameStart();
+						gameTips();
 					},
                     //显示规则
                     showRules(){
@@ -216,6 +232,7 @@
                             },900);
                         });
 					},
+					
 					//查看详情
 					lookDetails(src,content,name,phone,address,msg){
                         $('#lookAddress').remove();
@@ -242,8 +259,7 @@
 
 				}
             });
-            audioAutoPlay('bomb',0);
-            getGameGift();
+            audioAutoPlay('bomb',0);   
 		</script>
 		<div class="delete2"></div>
 	</body>

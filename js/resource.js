@@ -13,14 +13,14 @@ var scoreText; //得分
 var scoreLayer;
 var weaponNumber = 0;//武器数量
 var bigBoss;
-//加载页面的图片
-var loadImg = [
-	{path:url+'img/plane1.png',type:'img',name:'plane1'},
-];
+var GameOpen = false;
+////加载页面的图片
+//var loadImg = [
+//	{path:url+'img/plane1.png',type:'img',name:'plane1'},
+//];
 //图片
 var imgAll = [
 	{path:url+'img/long.png',type:'img',name:'long'},//我方飞机
-    {path:url+'img/plane2.png',type:'img',name:'plane2'},//敌机
     {path:url+'img/bullet1.png',type:'img',name:'bullet1'},//子弹1
     {path:url+'img/bullet2.png',type:'img',name:'bullet2'},//子弹2
     {path:url+'img/bullet3.png',type:'img',name:'bullet3'},//子弹3
@@ -51,13 +51,37 @@ var imgAll = [
     {path:url+'img/gift6.png',type:'img',name:'gift6'},//礼物6
     {path:url+'img/gift7.png',type:'img',name:'gift7'},//礼物7
     {path:url+'img/gift8.png',type:'img',name:'gift8'},//礼物8
+    {path:url+'img/gift9.png',type:'img',name:'gift9'},//礼物8
+    {path:url+'img/gift10.png',type:'img',name:'gift10'},//礼物8
+    {path:url+'img/getGift.png',type:'img',name:'getGift'},//礼物8
     {path:url+'img/address1.png',type:'img',name:'address1'},//地址1
     {path:url+'img/address2.png',type:'img',name:'address2'},//地址2
     {path:url+'img/address3.png',type:'img',name:'address3'},//地址3
+    {path:url+'img/award.png',type:'img',name:'award'},//地址3
+    {path:url+'img/award0.png',type:'img',name:'award0'},//地址3
+    {path:url+'img/award1.png',type:'img',name:'award1'},//地址3
+    {path:url+'img/award2.png',type:'img',name:'award2'},//地址3
+    {path:url+'img/award3.png',type:'img',name:'award3'},//地址3
     {path:url+'img/pop.png',type:'img',name:'pop'},//弹窗
     {path:url+'img/pop1.png',type:'img',name:'pop1'},//弹窗1
     {path:url+'img/pop2.png',type:'img',name:'pop2'},//弹窗2
     {path:url+'img/pop3.png',type:'img',name:'pop3'},//弹窗2
+    {path:url+'img/success1.png',type:'img',name:'success1'},//弹窗2
+    {path:url+'img/success2.png',type:'img',name:'success2'},//弹窗2
+    {path:url+'img/success3.png',type:'img',name:'success3'},//弹窗2
+    {path:url+'img/success4.png',type:'img',name:'success4'},//弹窗2
+    {path:url+'img/success5.png',type:'img',name:'success5'},//弹窗2
+    {path:url+'img/share1.png',type:'img',name:'share1'},//弹窗2
+    {path:url+'img/share2.png',type:'img',name:'share2'},//弹窗2   
+    {path:url+'img/share3.png',type:'img',name:'share3'},//弹窗2  
+    {path:url+'img/load1.png',type:'img',name:'load1'},//弹窗2 
+	{path:url+'img/loadBkg.png',type:'img',name:'loadBkg'},//弹窗2   
+	{path:url+'img/person.png',type:'img',name:'person'},//弹窗2 
+	{path:url+'img/person1.png',type:'img',name:'person1'},//弹窗2 
+	{path:url+'img/indexBtn1.png',type:'img',name:'indexBtn1'},//弹窗2 
+	{path:url+'img/indexBtn2.png',type:'img',name:'indexBtn2'},//弹窗2 
+	{path:url+'img/indexBtn3.png',type:'img',name:'indexBtn3'},//弹窗2 
+	{path:url+'img/gameRule.png',type:'img',name:'gameRule'},//弹窗2 
 ];
 //游戏初始化
 LInit(1000 / 40, "plane", 750, 1206, main);
@@ -67,13 +91,16 @@ function main() {
 	LGlobal.screen(LStage.FULL_SCREEN); //设置全面适应
 	backLayer = new LSprite(); //创建背景层
 	addChild(backLayer); //添加背景层到游戏环境中
-	LLoadManage.load(loadImg, "", loadImging);
+	LLoadManage.load(imgAll,loadinging, startGame);
 }
 //加载页面
 function loadImging(res){
-    LLoadManage.load(imgAll,loadinging, startGame);
+    
 }
 //加载进度
 function loadinging(per){
-
+	console.log(per);
+	var per = parseInt(per);
+	$('.load3 p').text(per+'%');
+	$('.load2 div').css('width',per+'%');
 }

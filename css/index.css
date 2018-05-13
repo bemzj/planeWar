@@ -665,4 +665,71 @@ body {
       display: block;
       width: 100%; }
 
+#loading {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10; }
+  #loading > img {
+    width: 100%;
+    height: 100%; }
+  #loading .loading {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    display: -webkit-flex;
+    -webkit-align-items: center;
+    -webkit-justify-content: center;
+    -webkit-flex-direction: column; }
+    #loading .loading .load1 {
+      width: 23.73%; }
+    #loading .loading .load2 {
+      width: 3.34rem;
+      height: 0.16rem;
+      background-color: white;
+      border-radius: 0.08rem;
+      overflow: hidden;
+      margin: 0.3rem 0 0.2rem; }
+      #loading .loading .load2 > div {
+        width: 0%;
+        height: 100%;
+        background-color: #099ebc; }
+    #loading .loading .load3 p {
+      font-size: 0.3rem;
+      color: #099ebc; }
+  #loading img {
+    width: 100%; }
+
+#gameRule .gameRule {
+  width: 83.6%; }
+#gameRule img {
+  width: 100%; }
+#gameRule .closeGameRule {
+  display: block;
+  width: 9.3%;
+  margin-top: 0.4rem; }
+#gameRule .timeCount {
+  position: absolute;
+  z-index: 10;
+  font-size: 3rem;
+  color: white; }
+#gameRule .tFrame {
+  animation: opr 1.0s  linear infinite; }
+
+@keyframes opr {
+  0% {
+    opacity: 1;
+    transform: scale(1, 1); }
+  100% {
+    opacity: 0;
+    transform: scale(0.2, 0.2); } }
+
 /*# sourceMappingURL=index.css.map */

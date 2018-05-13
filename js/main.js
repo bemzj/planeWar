@@ -37,16 +37,7 @@ function music(){
 
 function startGame(res){
 	imgList = res;
-    homepage();
-}
-//首页
-function homepage(){
-	LTweenLite.pauseAll();	
-	backLayer.removeAllChild();
-	backLayer.die();
-
-
-    // gameStart();
+    app.pageIndex = 1;
 }
 //开始游戏
 function gameStart(){
@@ -79,63 +70,67 @@ function gameStart(){
     bigBoss = new Boss(350,0);
     enemyLayer.addChild(bigBoss);
     enemyLayer.addEventListener(LEvent.ENTER_FRAME,function () {
-        // efps++;
-        // if(efps%20==0)
-		// {
-         //    efps = 1;
-         //    en++;
-        //
-		// 	if(ix<=110)
-		// 	{
-		// 		ix=Math.random()*(530-ix);
-		// 	}else if(ix>530){
-		// 		ix=ix-Math.random()*ix;
-		// 	}
-		// 	else{
-		// 		if(Math.random()<0.5)
-		// 		{
-         //            ix=ix+110+(530-ix)*Math.random();
-		// 		}else{
-         //            ix=(ix-110)*Math.random();
-		// 		}
-		// 	}
-		// 	if(en==20)
-		// 	{
-         //        en = 0;
-         //        var index = magicGroup.length;
-         //        // magicGroup[index] = new weapon(ix,-92,4,parseInt(Math.random()*3)+2);
-         //        magicGroup[index] = new weapon(ix,-92,4,4);
-         //        enemyLayer.addChild(magicGroup[index]);
-		// 	}else{
-         //        var index = germGroup.length;
-         //        germGroup[index] = new enemy(ix,-92,4,parseInt(Math.random()*3)+1);
-         //        enemyLayer.addChild(germGroup[index]);
-		// 	}
-        //
-        // }
+    	if(GameOpen==true){
+           efps++;
+           if(efps%20==0)
+		 {
+               efps = 1;
+               en++;
+          
+		 	if(ix<=110)
+		 	{
+		 		ix=Math.random()*(530-ix);
+		 	}else if(ix>530){
+		 		ix=ix-Math.random()*ix;
+		 	}
+		 	else{
+		 		if(Math.random()<0.5)
+		 		{
+                       ix=ix+110+(530-ix)*Math.random();
+		 		}else{
+                       ix=(ix-110)*Math.random();
+		 		}
+		 	}
+		 	if(en==20)
+		 	{
+                   en = 0;
+                   var index = magicGroup.length;
+                   // magicGroup[index] = new weapon(ix,-92,4,parseInt(Math.random()*3)+2);
+                   magicGroup[index] = new weapon(ix,-92,4,4);
+                   enemyLayer.addChild(magicGroup[index]);
+		 	}else{
+                   var index = germGroup.length;
+                   germGroup[index] = new enemy(ix,-92,4,parseInt(Math.random()*3)+1);
+                   enemyLayer.addChild(germGroup[index]);
+		 	}
+          
+           }
+		}
     });
 
     //////////////////////////////////////////////////////-子弹飞-/////////////////////////////////////////////
     var fps = 0;
     palyLayer.addEventListener(LEvent.ENTER_FRAME,function(){
-    	fps++;
-    	if(fps%10==0)
-    	{
-    		fps=1;
-    		switch (player.bulletType)
-			{
-				case 1:
-				case 2:
-                    palyLayer.addChild(new bullet(player.bulletType,player.x,player.bitmap.getWidth(),player.y,1,0));
-					break;
-				case 3:
-                    palyLayer.addChild(new bullet(player.bulletType,player.x,240,player.y,1.08,-300,0));
-                    palyLayer.addChild(new bullet(player.bulletType,player.x,120,player.y,1,0));
-                    palyLayer.addChild(new bullet(player.bulletType,player.x,0,player.y,1,300));
-					break;
-			}
-
-    	}
+    	if(GameOpen==true){
+	    	fps++;
+	    	if(fps%10==0)
+	    	{
+	    		fps=1;
+	    		switch (player.bulletType)
+				{
+					case 1:
+					case 2:
+	                    palyLayer.addChild(new bullet(player.bulletType,player.x,player.bitmap.getWidth(),player.y,1,0));
+						break;
+					case 3:
+	                    palyLayer.addChild(new bullet(player.bulletType,player.x,240,player.y,1.08,-300,0));
+	                    palyLayer.addChild(new bullet(player.bulletType,player.x,120,player.y,1,0));
+	                    palyLayer.addChild(new bullet(player.bulletType,player.x,0,player.y,1,300));
+						break;
+				}
+	
+	    	}
+	    }
     });
     //////////////////////////////////////////////////////////////////////////////////////////////////////////
 	////////////////////////////////////////////-我方飞机移动功能-//////////////////////////////////////////////
