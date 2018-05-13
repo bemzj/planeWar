@@ -36,6 +36,7 @@
 	<body>
 		<div class="delete1">
 		<div id="app">
+			<!--首页-->
 			<div id="homepage" v-if="pageIndex==1">
 				<div class="pg0">
 					<img src="img/index8.png" class="img" />
@@ -115,13 +116,16 @@
 				</div>
 				<a herf="###" class="backHome"><img src="img/gift10.png" @touchStart="pageIndex=1"/> </a>
 			</div>
-			<!--显示-->
+			<!--显示填写地址-->
 			<iframe src="address.html" id="addressFrame" class="pw" v-if="addressShow==1"></iframe>
-			<div id="plane"></div>
+			<!--显示摇奖-->
+			<iframe src="award.html" id="addressFrame" class="pw" v-show="pageIndex==6"></iframe>
+			<div id="plane" v-show="pageIndex==3"></div>
 		</div>
 
 		<audio id="bomb" src="music/bomb.mp3" hidden="hidden" preload ></audio>
-
+		
+		
 		<script>
             $('.img').on('click',function () {
 				return false;
@@ -134,7 +138,7 @@
 		<script  type="text/javascript" src="js/class.js"></script>
 		<script  type="text/javascript" src="js/bemGame.js"></script>
 		<script>
-            // showPop(2,"");
+				
             //微信加入聊天
             function audioAutoPlay(id,v){
                 var audio = document.getElementById(id);
@@ -155,8 +159,10 @@
             var app =  new Vue({
                 el: '#app',
                 data: {
+                	links:"https://www.baidu.com/",
+                	awardIndex:0,
                     addressShow:0,//显示填写地址弹窗
-                    pageIndex:2,//页面
+                    pageIndex:1,//0为加载页 1为首页 2积分商城+我的礼品 3为游戏页6为摇奖页面
 					wxScore:100000,
 					giftShopIndex:0,//默认我的礼品页面
 					giftIndex:0,
@@ -237,6 +243,7 @@
 				}
             });
             audioAutoPlay('bomb',0);
+            getGameGift();
 		</script>
 		<div class="delete2"></div>
 	</body>

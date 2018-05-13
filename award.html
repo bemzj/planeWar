@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>移动端-大转盘</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+		<meta content="yes" name="apple-mobile-web-app-capable"/>
+		<meta content="black" name="apple-mobile-web-app-status-bar-style"/>
+		<meta content="telephone=no" name="format-detection"/>
+		<link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet">
+		<link rel="stylesheet" href="css/reset.css" />
+		<link rel="stylesheet" href="css/award.css" />
+		<script>
+	        (function(doc, win) {
+	            var docEl = doc.documentElement,
+	                resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+	                recalc = function() {
+	                    var clientWidth = docEl.clientWidth;
+	                    if(!clientWidth) return;
+	                    if(clientWidth >= 750) {
+	                        docEl.style.fontSize = '100px';
+	                    } else {
+	                        docEl.style.fontSize = 100 * (clientWidth / 750) + 'px';
+	                    }
+	                };
+	
+	            if(!doc.addEventListener) return;
+	            win.addEventListener(resizeEvt, recalc, false);
+	            doc.addEventListener('DOMContentLoaded', recalc, false);
+	        })(document, window);
+	    </script>
+		<script src="http://www.jq22.com/jquery/jquery-1.10.2.js"></script>
+		<script type="text/javascript" src="js/gagaRotate.js" ></script>
+		<script src="js/vue.js"></script>
+	</head>
+	<body>
+		<div id="award">
+			<div class="bigTitle" :class="{animated:index==6,bounceInDown:index==6}">
+				<img src="img/award0.png"/>
+			</div>
+			<div class="awardBox">
+				<div class="awardTitle" :class="{animated:index==6,bounceIn:index==6}">
+					<img src="img/award3.png"/>
+				</div>
+				<div :class="{animated:index==6,slideInUp:index==6}">
+					<div class="awardGift" >
+						<img src="img/award1.png" style="transform: rotate(22deg);"/>
+					</div>
+					<div class="start">
+						<img src="img/award2.png" />
+					</div>
+				</div>
+				
+			</div>
+		</div>
+		<script type="text/javascript" src="js/award.js" ></script>
+		<script>
+			var app =  new Vue({
+                el: '#award',
+                data: {
+                	index:parent.app.awardIndex
+                }
+            });
+		</script>
+	</body>
+</html>

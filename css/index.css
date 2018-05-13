@@ -1,4 +1,3 @@
-@charset "UTF-8";
 body {
   overflow: hidden; }
 
@@ -112,69 +111,69 @@ body {
   0% {
     transform: matrix(1, 0, 0, 1, 0, 0); }
   10% {
-    transform: matrix(0.984808, 0.173648, -0.173648, 0.984808, 8, -8); }
+    transform: matrix(0.98481, 0.17365, -0.17365, 0.98481, 8, -8); }
   20% {
     transform: matrix(1, 0, 0, 1, 16, -16); }
   30% {
-    transform: matrix(0.984808, 0.173648, -0.173648, 0.984808, 24, -24); }
+    transform: matrix(0.98481, 0.17365, -0.17365, 0.98481, 24, -24); }
   40% {
     transform: matrix(1, 0, 0, 1, 32, -32); }
   50% {
-    transform: matrix(0.984808, 0.173648, -0.173648, 0.984808, 40, -40); }
+    transform: matrix(0.98481, 0.17365, -0.17365, 0.98481, 40, -40); }
   60% {
     transform: matrix(1, 0, 0, 1, 32, -32); }
   70% {
-    transform: matrix(0.984808, 0.173648, -0.173648, 0.984808, 24, -24); }
+    transform: matrix(0.98481, 0.17365, -0.17365, 0.98481, 24, -24); }
   80% {
     transform: matrix(1, 0, 0, 1, 16, -16); }
   90% {
-    transform: matrix(0.984808, 0.173648, -0.173648, 0.984808, 8, -8); }
+    transform: matrix(0.98481, 0.17365, -0.17365, 0.98481, 8, -8); }
   100% {
     transform: matrix(1, 0, 0, 1, 0, 0); } }
 @keyframes move2 {
   0% {
     transform: matrix(1, 0, 0, 1, 0, 0); }
   10% {
-    transform: matrix(0.984808, 0.173648, -0.173648, 0.984808, -8, 8); }
+    transform: matrix(0.98481, 0.17365, -0.17365, 0.98481, -8, 8); }
   20% {
     transform: matrix(1, 0, 0, 1, -16, 16); }
   30% {
-    transform: matrix(0.984808, 0.173648, -0.173648, 0.984808, -24, 24); }
+    transform: matrix(0.98481, 0.17365, -0.17365, 0.98481, -24, 24); }
   40% {
     transform: matrix(1, 0, 0, 1, -32, 32); }
   50% {
-    transform: matrix(0.984808, 0.173648, -0.173648, 0.984808, -40, 40); }
+    transform: matrix(0.98481, 0.17365, -0.17365, 0.98481, -40, 40); }
   60% {
     transform: matrix(1, 0, 0, 1, -32, 32); }
   70% {
-    transform: matrix(0.984808, 0.173648, -0.173648, 0.984808, -24, 24); }
+    transform: matrix(0.98481, 0.17365, -0.17365, 0.98481, -24, 24); }
   80% {
     transform: matrix(1, 0, 0, 1, -16, 16); }
   90% {
-    transform: matrix(0.984808, 0.173648, -0.173648, 0.984808, -8, 8); }
+    transform: matrix(0.98481, 0.17365, -0.17365, 0.98481, -8, 8); }
   100% {
     transform: matrix(1, 0, 0, 1, 0, 0); } }
 @keyframes move3 {
   0% {
     transform: matrix(1, 0, 0, 1, 0, 0); }
   10% {
-    transform: matrix(0.984808, 0.173648, -0.173648, 0.984808, 10, 10); }
+    transform: matrix(0.98481, 0.17365, -0.17365, 0.98481, 10, 10); }
   20% {
     transform: matrix(1, 0, 0, 1, 20, 20); }
   30% {
-    transform: matrix(0.984808, 0.173648, -0.173648, 0.984808, 30, 30); }
+    transform: matrix(0.98481, 0.17365, -0.17365, 0.98481, 30, 30); }
   40% {
     transform: matrix(1, 0, 0, 1, 40, 40); }
   50% {
-    transform: matrix(0.984808, 0.173648, -0.173648, 0.984808, 50, 50); }
+    transform: matrix(0.98481, 0.17365, -0.17365, 0.98481, 50, 50); }
   60% {
     transform: matrix(1, 0, 0, 1, 40, 40); }
   70% {
-    transform: matrix(0.984808, 0.173648, -0.173648, 0.984808, 30, 30); }
+    transform: matrix(0.98481, 0.17365, -0.17365, 0.98481, 30, 30); }
   80% {
     transform: matrix(1, 0, 0, 1, 20, 20); }
   90% {
-    transform: matrix(0.984808, 0.173648, -0.173648, 0.984808, 10, 10); }
+    transform: matrix(0.98481, 0.17365, -0.17365, 0.98481, 10, 10); }
   100% {
     transform: matrix(1, 0, 0, 1, 0, 0); } }
 @keyframes bigAndSmall {
@@ -380,21 +379,13 @@ body {
         background-color: transparent;
         font-size: 0.26rem; }
     #address .address .addressIn ul li::before {
-      content: "姓名：";
+      content: "";
       position: absolute;
       line-height: 0.55rem;
       width: 2.0rem;
       right: 102%;
       text-align: right;
       top: 0; }
-    #address .address .addressIn ul li:nth-child(2)::before {
-      content: "手机："; }
-    #address .address .addressIn ul li:nth-child(3)::before {
-      content: "城市："; }
-    #address .address .addressIn ul li:nth-child(4)::before {
-      content: "地址："; }
-    #address .address .addressIn ul li:nth-child(5)::before {
-      content: "留言："; }
     #address .address .addressIn ul li.textArea {
       height: 1.2rem; }
       #address .address .addressIn ul li.textArea > div {
@@ -522,5 +513,156 @@ body {
 #lookAddress .closeLook {
   width: 9.3%;
   margin-top: 0.4rem; }
+
+#fail {
+  z-index: 500; }
+  #fail img {
+    width: 100%; }
+  #fail .fail1 {
+    width: 37.07%; }
+  #fail .fail2 {
+    width: 35.73%;
+    margin: 0.5rem 0; }
+  #fail .fail3 {
+    width: 80%;
+    text-align: center;
+    font-size: 0.3rem;
+    color: #ffffff;
+    line-height: 0.5rem; }
+  #fail .fail4 {
+    width: 68%;
+    margin: 0.5rem 0; }
+    #fail .fail4 a {
+      display: block;
+      width: 49.5%; }
+  #fail .fail5 {
+    width: 50%; }
+    #fail .fail5 a {
+      display: block;
+      width: 100%; }
+  #fail .fail6 {
+    width: 38%;
+    margin-top: 0.5rem; }
+    #fail .fail6 a {
+      display: block;
+      width: 100%; }
+
+.fail > div {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  display: -webkit-flex;
+  -webkit-align-items: center;
+  -webkit-justify-content: center;
+  -webkit-flex-direction: column; }
+
+#success {
+  z-index: 500; }
+  #success img {
+    width: 100%; }
+  #success .success1 {
+    width: 37.07%; }
+  #success .success2 {
+    width: 35.73%;
+    position: relative;
+    margin: 0.5rem 0; }
+    #success .success2 > img {
+      opacity: 0; }
+    #success .success2 .success21 {
+      position: absolute;
+      top: -30%;
+      width: 230%;
+      left: -65%;
+      animation: 10s rotates linear infinite; }
+    #success .success2 .success22 {
+      position: absolute;
+      top: 10%;
+      width: 160%;
+      left: -30%;
+      animation: 1.2s bling1 linear infinite; }
+    #success .success2 .success23 {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%; }
+  #success .success3 {
+    width: 80%;
+    text-align: center;
+    font-size: 0.3rem;
+    color: #ffffff;
+    line-height: 0.5rem; }
+  #success .success4 {
+    width: 40%;
+    margin-top: 0.6rem; }
+    #success .success4 a {
+      display: block; }
+
+.success > div {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  display: -webkit-flex;
+  -webkit-align-items: center;
+  -webkit-justify-content: center;
+  -webkit-flex-direction: column; }
+
+@keyframes bling1 {
+  0% {
+    opacity: 1; }
+  50% {
+    opacity: 0.5; }
+  100% {
+    opacity: 1; } }
+@keyframes rotates {
+  0% {
+    transform: rotate(0deg); }
+  100% {
+    transform: rotate(360deg); } }
+#giftPop .giftPop {
+  width: 87.07%;
+  position: relative; }
+#giftPop img {
+  width: 100%; }
+#giftPop .giftPopIn {
+  position: absolute;
+  width: 74%;
+  height: 81%;
+  top: 16%;
+  left: 13%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  display: -webkit-flex;
+  -webkit-align-items: center;
+  -webkit-justify-content: center;
+  -webkit-flex-direction: column; }
+  #giftPop .giftPopIn .gp1 {
+    width: 50%; }
+  #giftPop .giftPopIn .gp2 {
+    width: 80%;
+    text-align: center;
+    font-size: 0.3rem;
+    color: #333333;
+    line-height: 0.5rem;
+    margin: 0.3rem 0 0.2rem; }
+  #giftPop .giftPopIn .gp3 {
+    width: 80%;
+    text-align: center;
+    font-size: 0.24rem;
+    color: #808080;
+    line-height: 0.5rem;
+    margin-bottom: 0.2rem; }
+  #giftPop .giftPopIn .gp4 {
+    width: 60%; }
+    #giftPop .giftPopIn .gp4 a {
+      display: block;
+      width: 100%; }
 
 /*# sourceMappingURL=index.css.map */
