@@ -14,10 +14,7 @@ var scoreLayer;
 var weaponNumber = 0;//武器数量
 var bigBoss;
 var GameOpen = false;
-////加载页面的图片
-//var loadImg = [
-//	{path:url+'img/plane1.png',type:'img',name:'plane1'},
-//];
+var bossButtles = [];
 //图片
 var imgAll = [
 	{path:url+'img/long.png',type:'img',name:'long'},//我方飞机
@@ -40,6 +37,11 @@ var imgAll = [
     {path:url+'img/magic3.png',type:'img',name:'magic3'},//加强弹
     {path:url+'img/magic4.png',type:'img',name:'magic4'},//清屏
     {path:url+'img/boss.png',type:'img',name:'boss'},//boss
+    {path:url+'img/boss0.png',type:'img',name:'boss0'},//boss
+    {path:url+'img/boss1.png',type:'img',name:'boss1'},//boss
+    {path:url+'img/boss2.png',type:'img',name:'boss2'},//boss
+    {path:url+'img/boss3.png',type:'img',name:'boss3'},//boss
+    {path:url+'img/boss4.png',type:'img',name:'boss4'},//boss
     {path:url+'img/rule1.png',type:'img',name:'rule1'},//规则1
     {path:url+'img/rule2.png',type:'img',name:'rule2'},//规则2
     {path:url+'img/gback.png',type:'img',name:'gback'},//礼物背景
@@ -99,6 +101,7 @@ var imgAll = [
     {path:url+'img/choice7.png',type:'img',name:'choice7'},//弹窗2
     {path:url+'img/choice8.png',type:'img',name:'choice8'},//弹窗2
     {path:url+'img/choice9.png',type:'img',name:'choice9'},//弹窗2
+    {path:url+'img/bomb.png',type:'img',name:'bomb'},//弹窗2
 ];
 //游戏初始化
 LInit(1000 / 40, "plane", 750, 1206, main);
@@ -109,10 +112,6 @@ function main() {
 	backLayer = new LSprite(); //创建背景层
 	addChild(backLayer); //添加背景层到游戏环境中
 	LLoadManage.load(imgAll,loadinging, startGame);
-}
-//加载页面
-function loadImging(res){
-    
 }
 //加载进度
 function loadinging(per){

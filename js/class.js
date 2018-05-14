@@ -21,6 +21,39 @@ myPlane.prototype.magicDisappear = function () {
     self.myTimer.reset();
     self.myTimer.start();
 }
+//boss的子弹
+function bossBullet(x,w,y,time,offsetX){
+    base(this,LSprite,[]);
+    var self = this;
+    self.bitmap = getBitmap(imgList['bullet2']);//子弹图片
+    self.addChild(self.bitmap);//添加图片
+    self.x = x+(w-self.bitmap.getWidth())/2;//子弹实际位置x
+    self.y = y+20;//子弹实际位置y
+    self.life = 1000;
+    LTweenLite.to(self,time,{y:1206,x:offsetX,onComplete:function(){
+       //子弹死亡
+       self.removeEventListener(LEvent.ENTER_FRAME);
+       self.die();
+       self.remove();
+    }});
+    //子弹速度
+    self.addEventListener(LEvent.ENTER_FRAME,function(){
+        if(self.hitTestObject(player))
+        {
+            //子弹死亡
+            self.removeEventListener(LEvent.ENTER_FRAME);
+            self.die();
+            self.remove();
+            //飞机移除
+            player.remove();
+            palyLayer.removeEventListener(LEvent.ENTER_FRAME);
+            enemyLayer.removeEventListener(LEvent.ENTER_FRAME);
+            bigBoss.removeEventListener(LEvent.ENTER_FRAME);
+            LTweenLite.pauseAll();
+        }
+
+    });
+}
 //子弹
 function bullet(type,x,w,y,time,offsetX,delay){
 	base(this,LSprite,[]);
@@ -43,7 +76,8 @@ function bullet(type,x,w,y,time,offsetX,delay){
 	}
 	LTweenLite.to(self,time,{delay:delay,y:-1206+y-self.bitmap.getHeight(),x:x-offsetX,onComplete:function(){
 		//子弹死亡
-            self.die();
+        self.removeEventListener(LEvent.ENTER_FRAME);
+        self.die();
 		self.remove();
 	}});//子弹速度
 	//每帧检测敌机碰撞
@@ -58,6 +92,13 @@ function bullet(type,x,w,y,time,offsetX,delay){
             self.die();
             //移除子弹
             self.remove();
+            var bomb = getBitmap(imgList['bomb']);
+            bomb.x = self.x;
+            bomb.y = self.y;
+            weaponLayer.addChild(bomb);
+            LTweenLite.to(bomb,0.2,{alpha:0,onComplete:function () {
+                    bomb.remove();
+                }});
             if(bigBoss.life<=0){
                 bigBoss.remove();
                 palyLayer.removeEventListener(LEvent.ENTER_FRAME);
@@ -87,6 +128,13 @@ function bullet(type,x,w,y,time,offsetX,delay){
 					//爆炸声音
                     $('#bomb')[0].currentTime=0;
 					$('#bomb')[0].play();
+					var bomb = getBitmap(imgList['bomb']);
+                    bomb.x = (germGroup[i].x +(germGroup[i].getWidth()-bomb.getWidth())/2);
+                    bomb.y = (germGroup[i].y +(germGroup[i].getHeight()-bomb.getHeight())/2);
+                    weaponLayer.addChild(bomb);
+                    LTweenLite.to(bomb,0.2,{alpha:0,onComplete:function () {
+                            bomb.remove();
+                        }});
 					//加分
                     scoreText.childList["0"].text= parseInt(scoreText.childList["0"].text)+germGroup[i].score;
                     //得分
@@ -109,6 +157,33 @@ function bullet(type,x,w,y,time,offsetX,delay){
 			}
 
 		}
+        for(var i=0;i<bossButtles.length;i++)
+        {
+            //碰撞成功
+            if(self.hitTestObject(bossButtles[i]))
+            {
+                //移除事件
+                self.removeEventListener(LEvent.ENTER_FRAME);
+                //子弹死亡
+                self.die();
+                //移除子弹
+                self.remove();
+                //敌机生命减少
+                bossButtles[i].life-=self.hurt;
+                if(bossButtles[i].life<=0)
+                {
+                    //移除事件
+                    bossButtles[i].removeEventListener(LEvent.ENTER_FRAME);
+                    //敌机死亡
+                    bossButtles[i].die();
+                    //敌机移除
+                    bossButtles[i].remove();
+                    //将从敌机组中移除
+                    bossButtles.splice(i,1);
+                }
+
+            }
+        }
 	});
 }
 
@@ -144,6 +219,7 @@ function enemy(x,y,time,id){
             player.remove();
             palyLayer.removeEventListener(LEvent.ENTER_FRAME);
             enemyLayer.removeEventListener(LEvent.ENTER_FRAME);
+            bigBoss.removeEventListener(LEvent.ENTER_FRAME);
             LTweenLite.pauseAll();
 		}
 	});
@@ -236,14 +312,20 @@ function clearWeapon(x,y) {
 function Boss(x,y) {
     base(this,LSprite,[]);
     var self = this;
-    self.bitmap = getBitmap(imgList['boss']);//飞机图片
+    self.bitmap = [];
+    for(var i=0;i<5;i++)
+    {
+        self.bitmap[i] = getBitmap(imgList['boss'+i]);//飞机图片
+        self.bitmap[i].visible = false;
+        self.addChild(self.bitmap[i]);
+    }
+    self.bitmap[0].visible = true;
     self.x = x;//横坐标
     self.y = y;//纵坐标
-    self.life = 100000;//十万血
-	self.addChild(self.bitmap);
+    self.life = 60000;//十万血
+    self.val =  self.life;
 	self.hit = new LSprite();
+	self.hit.y = -10;
     self.addChild(self.hit);
-    self.hit.addShape(LShape.ARC,[160,150,140]);
-
-
+    self.hit.addShape(LShape.VERTICES,[[0, 182], [32, 250], [75, 252],[75,376],[132,393],[202,393],[246,372],[249,260],[308,230],[330,157]]);
 }
