@@ -37,7 +37,27 @@ function music(){
 
 function startGame(res){
 	imgList = res;
-    app.pageIndex = 1;
+    app.pageIndex = 4;
+    showStory();
+}
+function showStory() {
+	setTimeout(function () {
+		$('.story2').show().addClass('animated bounceInLeft');
+		setTimeout(function () {
+			$('.story1').show().addClass('animated bounceIn');
+			$('.story3').show().addClass('animated fadeInRightBig');
+			setTimeout(function () {
+				$('.story4').show().addClass('animated bounceIn');
+				$('.story6').show().addClass('animated bounceInLeft');
+				setTimeout(function () {
+					$('.story5').show().addClass('animated bounceIn');
+					setTimeout(function () {
+						app.pageIndex = 1;
+					},2000);
+				},1000);
+			},1000);
+		},800);
+	},100);
 }
 //开始游戏
 function gameStart(){

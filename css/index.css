@@ -1,3 +1,4 @@
+@charset "UTF-8";
 body {
   overflow: hidden; }
 
@@ -111,69 +112,69 @@ body {
   0% {
     transform: matrix(1, 0, 0, 1, 0, 0); }
   10% {
-    transform: matrix(0.98481, 0.17365, -0.17365, 0.98481, 8, -8); }
+    transform: matrix(0.984808, 0.173648, -0.173648, 0.984808, 8, -8); }
   20% {
     transform: matrix(1, 0, 0, 1, 16, -16); }
   30% {
-    transform: matrix(0.98481, 0.17365, -0.17365, 0.98481, 24, -24); }
+    transform: matrix(0.984808, 0.173648, -0.173648, 0.984808, 24, -24); }
   40% {
     transform: matrix(1, 0, 0, 1, 32, -32); }
   50% {
-    transform: matrix(0.98481, 0.17365, -0.17365, 0.98481, 40, -40); }
+    transform: matrix(0.984808, 0.173648, -0.173648, 0.984808, 40, -40); }
   60% {
     transform: matrix(1, 0, 0, 1, 32, -32); }
   70% {
-    transform: matrix(0.98481, 0.17365, -0.17365, 0.98481, 24, -24); }
+    transform: matrix(0.984808, 0.173648, -0.173648, 0.984808, 24, -24); }
   80% {
     transform: matrix(1, 0, 0, 1, 16, -16); }
   90% {
-    transform: matrix(0.98481, 0.17365, -0.17365, 0.98481, 8, -8); }
+    transform: matrix(0.984808, 0.173648, -0.173648, 0.984808, 8, -8); }
   100% {
     transform: matrix(1, 0, 0, 1, 0, 0); } }
 @keyframes move2 {
   0% {
     transform: matrix(1, 0, 0, 1, 0, 0); }
   10% {
-    transform: matrix(0.98481, 0.17365, -0.17365, 0.98481, -8, 8); }
+    transform: matrix(0.984808, 0.173648, -0.173648, 0.984808, -8, 8); }
   20% {
     transform: matrix(1, 0, 0, 1, -16, 16); }
   30% {
-    transform: matrix(0.98481, 0.17365, -0.17365, 0.98481, -24, 24); }
+    transform: matrix(0.984808, 0.173648, -0.173648, 0.984808, -24, 24); }
   40% {
     transform: matrix(1, 0, 0, 1, -32, 32); }
   50% {
-    transform: matrix(0.98481, 0.17365, -0.17365, 0.98481, -40, 40); }
+    transform: matrix(0.984808, 0.173648, -0.173648, 0.984808, -40, 40); }
   60% {
     transform: matrix(1, 0, 0, 1, -32, 32); }
   70% {
-    transform: matrix(0.98481, 0.17365, -0.17365, 0.98481, -24, 24); }
+    transform: matrix(0.984808, 0.173648, -0.173648, 0.984808, -24, 24); }
   80% {
     transform: matrix(1, 0, 0, 1, -16, 16); }
   90% {
-    transform: matrix(0.98481, 0.17365, -0.17365, 0.98481, -8, 8); }
+    transform: matrix(0.984808, 0.173648, -0.173648, 0.984808, -8, 8); }
   100% {
     transform: matrix(1, 0, 0, 1, 0, 0); } }
 @keyframes move3 {
   0% {
     transform: matrix(1, 0, 0, 1, 0, 0); }
   10% {
-    transform: matrix(0.98481, 0.17365, -0.17365, 0.98481, 10, 10); }
+    transform: matrix(0.984808, 0.173648, -0.173648, 0.984808, 10, 10); }
   20% {
     transform: matrix(1, 0, 0, 1, 20, 20); }
   30% {
-    transform: matrix(0.98481, 0.17365, -0.17365, 0.98481, 30, 30); }
+    transform: matrix(0.984808, 0.173648, -0.173648, 0.984808, 30, 30); }
   40% {
     transform: matrix(1, 0, 0, 1, 40, 40); }
   50% {
-    transform: matrix(0.98481, 0.17365, -0.17365, 0.98481, 50, 50); }
+    transform: matrix(0.984808, 0.173648, -0.173648, 0.984808, 50, 50); }
   60% {
     transform: matrix(1, 0, 0, 1, 40, 40); }
   70% {
-    transform: matrix(0.98481, 0.17365, -0.17365, 0.98481, 30, 30); }
+    transform: matrix(0.984808, 0.173648, -0.173648, 0.984808, 30, 30); }
   80% {
     transform: matrix(1, 0, 0, 1, 20, 20); }
   90% {
-    transform: matrix(0.98481, 0.17365, -0.17365, 0.98481, 10, 10); }
+    transform: matrix(0.984808, 0.173648, -0.173648, 0.984808, 10, 10); }
   100% {
     transform: matrix(1, 0, 0, 1, 0, 0); } }
 @keyframes bigAndSmall {
@@ -379,13 +380,21 @@ body {
         background-color: transparent;
         font-size: 0.26rem; }
     #address .address .addressIn ul li::before {
-      content: "";
+      content: "姓名：";
       position: absolute;
       line-height: 0.55rem;
       width: 2.0rem;
       right: 102%;
       text-align: right;
       top: 0; }
+    #address .address .addressIn ul li:nth-child(2)::before {
+      content: "手机："; }
+    #address .address .addressIn ul li:nth-child(3)::before {
+      content: "城市："; }
+    #address .address .addressIn ul li:nth-child(4)::before {
+      content: "地址："; }
+    #address .address .addressIn ul li:nth-child(5)::before {
+      content: "留言："; }
     #address .address .addressIn ul li.textArea {
       height: 1.2rem; }
       #address .address .addressIn ul li.textArea > div {
@@ -731,5 +740,125 @@ body {
   100% {
     opacity: 0;
     transform: scale(0.2, 0.2); } }
+#story {
+  background: url("../img/story0.png") no-repeat left top;
+  -webkit-background-size: 100% 100%;
+  background-size: 100% 100%;
+  z-index: 10; }
+  #story > div {
+    position: absolute;
+    display: none; }
+  #story img {
+    width: 100%; }
+  #story .story1 {
+    bottom: 76.37%;
+    right: 51.73%;
+    width: 44.67%; }
+  #story .story2 {
+    bottom: 74.4%;
+    right: 0%;
+    width: 50.93%; }
+  #story .story3 {
+    top: 25.46%;
+    left: 0%;
+    width: 100%; }
+    #story .story3 .story4 {
+      position: absolute;
+      top: 0;
+      right: 51.47%;
+      width: 33.6%;
+      display: none; }
+  #story .story5 {
+    width: 42.47%;
+    left: 5.07%;
+    bottom: 17%; }
+  #story .story6 {
+    width: 57.86%;
+    right: 4%;
+    bottom: 2.9%; }
+    #story .story6 > img {
+      opacity: 0; }
+    #story .story6 .story61 {
+      position: absolute;
+      left: 0;
+      top: 0;
+      z-index: 10; }
+    #story .story6 .story62 {
+      position: absolute;
+      right: -2%;
+      top: 11%;
+      width: 84.1%;
+      z-index: 9;
+      animation: rotating 3s linear infinite; }
+
+@keyframes rotating {
+  0% {
+    transform: rotate(0deg); }
+  100% {
+    transform: rotate(360deg); } }
+#choice {
+  z-index: 10;
+  background: url("../img/choice5.png") no-repeat left top;
+  -webkit-background-size: 100% 100%;
+  background-size: 100% 100%; }
+  #choice .choiceTitle {
+    position: absolute;
+    top: 15%;
+    width: 79.2%;
+    left: 10.4%; }
+  #choice img {
+    width: 100%; }
+  #choice .swiper-container {
+    width: 54.4%;
+    overflow: visible; }
+    #choice .swiper-container img {
+      width: 100%; }
+    #choice .swiper-container .choiceBox {
+      width: 100%; }
+      #choice .swiper-container .choiceBox > img {
+        opacity: 0; }
+      #choice .swiper-container .choiceBox .choiceBoxIn {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 5;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        display: -webkit-flex;
+        -webkit-align-items: center;
+        -webkit-justify-content: center;
+        -webkit-flex-direction: column; }
+        #choice .swiper-container .choiceBox .choiceBoxIn > img {
+          width: 65%; }
+    #choice .swiper-container .swiper-slide-active {
+      background: url("../img/choice3.png") no-repeat left top;
+      -webkit-background-size: 100% 100%;
+      background-size: 100% 100%; }
+    #choice .swiper-container .swiper-button-next, #choice .swiper-container .swiper-button-prev {
+      position: absolute;
+      top: 50%;
+      width: 0.17rem;
+      height: 0.44rem;
+      margin-top: -0.22rem;
+      z-index: 10;
+      cursor: pointer;
+      background: url("../img/choice4.png") no-repeat left top;
+      -moz-background-size: 0.17rem 0.44rem;
+      -webkit-background-size: 0.17rem 0.44rem;
+      background-size: 0.17rem 0.44rem; }
+    #choice .swiper-container .swiper-button-next {
+      right: -0.3rem;
+      transform: rotate(180deg); }
+    #choice .swiper-container .swiper-button-prev {
+      left: -0.3rem; }
+  #choice .confirm {
+    width: 69.34%;
+    left: 15.33%;
+    position: absolute;
+    bottom: 15%; }
 
 /*# sourceMappingURL=index.css.map */

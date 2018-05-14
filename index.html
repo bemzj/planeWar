@@ -7,6 +7,7 @@
 		<meta content="yes" name="apple-mobile-web-app-capable"/>
 		<meta content="black" name="apple-mobile-web-app-status-bar-style"/>
 		<meta content="telephone=no" name="format-detection"/>
+		<link rel="stylesheet" href="css/swiper-3.4.2.min.css" />
 		<link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet">
 		<link rel="stylesheet" href="css/reset.css" />
 		<link rel="stylesheet" href="css/index.css"/>
@@ -29,6 +30,7 @@
                 doc.addEventListener('DOMContentLoaded', recalc, false);
             })(document, window);
 		</script>
+		<script src="js/swiper-3.4.2.min.js"></script>
 		<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
 		<script type="text/javascript" src="js/lufylegend-1.10.1.min.js" ></script>
 		<script src="js/vue.js"></script>
@@ -48,6 +50,34 @@
 					</div>
 					<div class="load3">
 						<p>0%</p>
+					</div>
+				</div>
+			</div>
+			<!--故事情节-->
+			<div id="story" class="pw" v-if="pageIndex==4">
+				<div class="story1">
+					<img src="img/story1.png" class="img"/>
+				</div>
+				<div class="story2">
+					<img src="img/story2.png" class="img"/>
+
+				</div>
+				<div class="story3">
+					<img src="img/story3.png" class="img"/>
+					<div class="story4">
+						<img src="img/story4.png" class="img"/>
+					</div>
+				</div>
+				<div class="story5">
+					<img src="img/story5.png" class="img"/>
+				</div>
+				<div class="story6">
+					<img src="img/story6.png" class="img"/>
+					<div class="story61">
+						<img src="img/story6.png" />
+					</div>
+					<div class="story62">
+						<img src="img/story7.png" />
 					</div>
 				</div>
 			</div>
@@ -135,6 +165,51 @@
 			<iframe src="address.html" id="addressFrame" class="pw" v-if="addressShow==1"></iframe>
 			<!--显示摇奖-->
 			<iframe src="award.html" id="addressFrame" class="pw" v-show="pageIndex==6"></iframe>
+			<!--选择英雄-->
+			<div id="choice" class="pw" v-show="pageIndex==5">
+				<div class="choiceTitle animated bounceInDown">
+					<img src="img/choice1.png"/>
+				</div>
+				<div class="swiper-container">
+					<div class="swiper-wrapper">
+						<div class="swiper-slide">
+							<div class="choiceBox">
+								<img src="img/choice3.png" />
+								<div class="choiceBoxIn">
+									<img src="img/choice6.png" />
+								</div>
+							</div>
+						</div>
+						<div class="swiper-slide">
+							<div class="choiceBox">
+								<img src="img/choice3.png" />
+								<div class="choiceBoxIn">
+									<img src="img/choice7.png" />
+								</div>
+							</div>
+						</div>
+						<div class="swiper-slide">
+							<div class="choiceBox">
+								<img src="img/choice3.png" />
+								<div class="choiceBoxIn">
+									<img src="img/choice8.png" />
+								</div>
+							</div>
+						</div>
+						<div class="swiper-slide">
+							<div class="choiceBox">
+								<img src="img/choice3.png" />
+								<div class="choiceBoxIn">
+									<img src="img/choice9.png" />
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="swiper-button-prev"></div>
+					<div class="swiper-button-next"></div>
+				</div>
+				<a href="###" class="confirm animated fadeInUp"><img src="img/choice2.png"/></a>
+			</div>
 			<div id="plane" v-show="pageIndex==3"></div>
 		</div>
 
@@ -177,10 +252,11 @@
                 	links:"https://www.baidu.com/",
                 	awardIndex:0,
                     addressShow:0,//显示填写地址弹窗
-                    pageIndex:0,//0为加载页 1为首页 2积分商城+我的礼品 3为游戏页6为摇奖页面
-					wxScore:100000,
+                    pageIndex:0,//0为加载页 1为首页 2积分商城+我的礼品 3为游戏页 4为故事页 5为选择英雄 6为摇奖页面
+					wxScore:100000, //我的积分
 					giftShopIndex:0,//默认我的礼品页面
 					giftIndex:0,
+					choicePerson:0,//默认为美国队长
 					mygifts:[{
                         "giftSrc":"img/gift5.png",
 						"content":"价值XX元的抱枕",
@@ -210,9 +286,31 @@
                     //开始游戏
                     startBtn(){
                         var self = this;
-                        self.pageIndex = 3;
 						gameStart();
-						gameTips();
+                        self.pageIndex = 5;
+						// gameTips();
+						setTimeout(function () {
+                            var mySwiper = new Swiper ('.swiper-container', {
+                                // 如果需要前进后退按钮
+                                nextButton: '.swiper-button-next',
+                                prevButton: '.swiper-button-prev',
+                                onInit: function(swiper){
+                                    $('.swiper-button-next').on('touchstart',function () {
+                                        swiper.slideNext(1000);
+                                    });
+                                    $('.swiper-button-prev').on('touchstart',function () {
+                                        swiper.slidePrev(1000);
+                                    });
+                                    $('.confirm').on('touchstart',function () {
+                                        self.pageIndex = 3;
+										gameTips();
+                                    });
+                                },
+                                onSlideChangeEnd: function(swiper){
+                                    app.choicePerson = swiper.activeIndex;
+                                }
+                            });
+                        },100);
 					},
                     //显示规则
                     showRules(){
@@ -259,7 +357,9 @@
 
 				}
             });
-            audioAutoPlay('bomb',0);   
+            audioAutoPlay('bomb',0);
+
+
 		</script>
 		<div class="delete2"></div>
 	</body>

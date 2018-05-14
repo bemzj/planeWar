@@ -81,7 +81,24 @@ var imgAll = [
 	{path:url+'img/indexBtn1.png',type:'img',name:'indexBtn1'},//弹窗2 
 	{path:url+'img/indexBtn2.png',type:'img',name:'indexBtn2'},//弹窗2 
 	{path:url+'img/indexBtn3.png',type:'img',name:'indexBtn3'},//弹窗2 
-	{path:url+'img/gameRule.png',type:'img',name:'gameRule'},//弹窗2 
+	{path:url+'img/gameRule.png',type:'img',name:'gameRule'},//弹窗2
+    {path:url+'img/story0.png',type:'img',name:'story0'},//弹窗2
+    {path:url+'img/story1.png',type:'img',name:'story1'},//弹窗2
+    {path:url+'img/story2.png',type:'img',name:'story2'},//弹窗2
+    {path:url+'img/story3.png',type:'img',name:'story3'},//弹窗2
+    {path:url+'img/story4.png',type:'img',name:'story4'},//弹窗2
+    {path:url+'img/story5.png',type:'img',name:'story5'},//弹窗2
+    {path:url+'img/story6.png',type:'img',name:'story6'},//弹窗2
+    {path:url+'img/story7.png',type:'img',name:'story7'},//弹窗2
+    {path:url+'img/choice1.png',type:'img',name:'choice1'},//弹窗2
+    {path:url+'img/choice2.png',type:'img',name:'choice2'},//弹窗2
+    {path:url+'img/choice3.png',type:'img',name:'choice3'},//弹窗2
+    {path:url+'img/choice4.png',type:'img',name:'choice4'},//弹窗2
+    {path:url+'img/choice5.png',type:'img',name:'choice5'},//弹窗2
+    {path:url+'img/choice6.png',type:'img',name:'choice6'},//弹窗2
+    {path:url+'img/choice7.png',type:'img',name:'choice7'},//弹窗2
+    {path:url+'img/choice8.png',type:'img',name:'choice8'},//弹窗2
+    {path:url+'img/choice9.png',type:'img',name:'choice9'},//弹窗2
 ];
 //游戏初始化
 LInit(1000 / 40, "plane", 750, 1206, main);
@@ -99,7 +116,7 @@ function loadImging(res){
 }
 //加载进度
 function loadinging(per){
-	console.log(per);
+	// console.log(per);
 	var per = parseInt(per);
 	$('.load3 p').text(per+'%');
 	$('.load2 div').css('width',per+'%');
