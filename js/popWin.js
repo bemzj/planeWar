@@ -63,7 +63,7 @@ function gameSuccess(score){
 	html += '</div><div class="success22"><img src="img/success4.png" class="img" />';
 	html += '</div><div class="success23"><img src="img/success2.png" class="img" />';
 	html += '</div></div><div class="success3 animated bounceIn">';
-	html += '<p>获得'+score+'积分与1次抽奖机会<br/>捍卫家园，消灭空气杀手<br/>你是位出色的除醛战士</p>';
+	html += '<p>获得'+score+'积分与1次抽奖机会<br/>捍卫家园，保护家人健康<br/>你是位出色的除醛战士</p>';
 	html += '</div><div class="success4 animated fadeInUp"><a href="###"><img src="img/success5.png"/></a></div></div>';
 	$('body').append(html);
 	$('#success .success4 a').one('touchstart',function(){
@@ -92,6 +92,9 @@ function gameFail(score,links){
 	});
 	//再次挑战
 	$('.fail4 .floatr').one('touchstart',function(){
+        $('#fail').remove();
+        gameStart();
+        gameTips();
 
 	});
 	//链接
@@ -145,7 +148,7 @@ function shareSuccess(){
 function getGameGift(){
 	$('#giftPop').remove();
 	var html = "";
-	html += '<div id="giftPop" class="pw mask"><div class="giftPop animated bounceInDown">';
+	html += '<div id="giftPop" class="pw mask" style="z-index: 9999"><div class="giftPop animated bounceInDown">';
 	html += '<img src="img/getGift.png" class="img"/><div class="giftPopIn">';
 	html += '<div class="gp1"><img src="img/gift5.png" /></div><div class="gp2">';
 	html += '<p>免费获得一个</p><p>价值XX元的抱枕</p></div><div class="gp3">';

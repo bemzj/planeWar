@@ -2,6 +2,7 @@ $(function() {
 	//删除不良信息
 	$('.delete1').prevAll().remove();
 	$('.delete2').nextAll().remove();
+    music();
 
 });
 //音乐开启
@@ -68,6 +69,11 @@ function gameStart(){
     backLayer.removeAllChild();
     backLayer.die();
     backLayer.addChild(getBitmap(imgList['game1']));
+    //出现
+    germGroup.splice(0,germGroup.length);//清空数组
+    magicGroup.splice(0,magicGroup.length);//清空数组
+    bossButtles.splice(0,bossButtles.length);//清空数组
+    GameOpen = false;
     /////////////////////////////////重置参数////////////////////////////////////////
 	//清屏武器层
     weaponLayer = new LSprite();
@@ -87,7 +93,9 @@ function gameStart(){
     palyLayer.removeAllChild();
     backLayer.addChild(palyLayer);
     //龙宝
-    player = new myPlane(350,1000,10000);
+    player = new myPlane(350,1000,5000,app.choicePerson);
+    player.x = (750-player.getWidth())/2;
+    player.y = 1206-player.getHeight()-20;
     palyLayer.addChild(player);
     ////////////////////////////////////////////-得分面板-//////////////////////////////////////////////////////
     scoreText = new setText(640,30,30,'0',"#ffffff","true");
@@ -103,8 +111,8 @@ function gameStart(){
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////Boss操作/////////////////////////////////////////////////////
     bigBoss = new Boss(210,20);     //添加大boss
-    bigBoss.visible = false;
     bigBoss.y = -bigBoss.getHeight()*2; //纵位置y
+    enemyLayer.addChild(bigBoss);
     var bigEFP = 0;
     var bigN = 0;//出现小怪的数量
 
@@ -115,12 +123,14 @@ function gameStart(){
     var timeBoss; //大boss左右移动
     //大boss每帧监听函数
     bigBoss.addEventListener(LEvent.ENTER_FRAME,function () {
-    	if(bossShow==true&&bigBoss.frame==true);
+    	if(bossShow == true && bigBoss.frame == true)
 		{
 			bigEFP++;
-			if(bigBoss.hitTestObject(player))
+			if(bigBoss.hit.hitTestObject(player))
 			{
-
+                //爆炸声音
+                // $('#bomb')[0].currentTime=0;
+                $('#bomb')[0].play();
 				//飞机移除
 				player.remove();
 				//移除palyLayer的每帧监听
@@ -191,10 +201,10 @@ function gameStart(){
 						bossMove.pause();
 					}
 					timeBoss.resume();
-					germGroup[index] = new enemy(bigBoss.x, bigBoss.getHeight(), 1.5, parseInt(Math.random() * 3) + 1);
+					germGroup[index] = new enemy(bigBoss.x, bigBoss.getHeight(), 1.5, parseInt(Math.random() * 3) + 1,true);
 					enemyLayer.addChild(germGroup[index]);
 					var index = germGroup.length;
-					germGroup[index] = new enemy(bigBoss.x+200, bigBoss.getHeight(), 1.5, parseInt(Math.random() * 3) + 1);
+					germGroup[index] = new enemy(bigBoss.x+200, bigBoss.getHeight(), 1.5, parseInt(Math.random() * 3) + 1,true);
 					enemyLayer.addChild(germGroup[index]);
 				}else{
 					var list = [];
@@ -227,17 +237,15 @@ function gameStart(){
     	if(GameOpen==true&&bossShow==false){
            efps++;
 
-            if(efps == 1001)
+            if(efps == 105)
 			{
-                console.log(1);
                 enemyLayer.removeEventListener(LEvent.ENTER_FRAME);
-                // bossShow = true;
-                // bigBoss.visible = true;
-                // enemyLayer.addChild(bigBoss);
-                // LTweenLite.toLocaleString(bigBoss,0.5,{y:20,onComplete:function () {
-                //         timeBoss  = LTweenLite.to(bigBoss,1.0,{x:20,loop:true}).to(bigBoss,1.0,{x:400,loop:true});
-                // }});
-			}else if(efps%20==0)
+                bossShow = true;
+                LTweenLite.to(bigBoss,0.5,{delay:0.5,y:20,onComplete:function () {
+                	timeBoss  = LTweenLite.to(bigBoss,1.0,{x:20,loop:true}).to(bigBoss,1.0,{x:400,loop:true});
+                	bigBoss.frame = true;
+                }});
+			}else if(efps%15==0)
            {
 
                en++;
@@ -261,10 +269,10 @@ function gameStart(){
 					en = 0;
 					var index = magicGroup.length;
 					magicGroup[index] = new weapon(ix,-92,4,parseInt(Math.random()*3)+2);
-				   enemyLayer.addChild(magicGroup[index]);
+				    enemyLayer.addChild(magicGroup[index]);
 				}else{
 					var index = germGroup.length;
-					germGroup[index] = new enemy(ix,-92,4,parseInt(Math.random()*3)+1);
+					germGroup[index] = new enemy(ix,-92,4,parseInt(Math.random()*3)+1,false);
 					enemyLayer.addChild(germGroup[index]);
 				}
            }

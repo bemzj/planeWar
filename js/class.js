@@ -8,7 +8,7 @@ function myPlane(x,y,time,id){
      */
 	base(this,LSprite,[]);//继承
 	var self = this;
-	self.bitmap = getBitmap(imgList['long']);//英雄图片
+	self.bitmap = getBitmap(imgList['long'+id]);//英雄图片
 	self.x = x; //横坐标
 	self.y = y; //纵坐标
 	self.bulletType = 1; //子弹类型
@@ -62,6 +62,9 @@ function bossBullet(x,w,y,time,offsetX){
             //子弹移除
             self.remove();
             //////////////////////////////////////////////////////////////////////////////
+            //爆炸声音
+            // $('#bomb')[0].currentTime=0;
+            $('#bomb')[0].play();
             //飞机移除
             player.remove();
             //移除palyLayer的每帧监听
@@ -139,6 +142,9 @@ function bullet(type,x,w,y,time,offsetX,delay){
             self.die();
             //移除子弹
             self.remove();
+            //爆炸声音
+            // $('#bomb')[0].currentTime=0;
+            $('#bomb')[0].play();
             //爆炸图片
             var bomb = getBitmap(imgList['bomb']);
             bomb.x = self.x; //爆炸位置x
@@ -160,6 +166,9 @@ function bullet(type,x,w,y,time,offsetX,delay){
                 LTweenLite.pauseAll();
                 //boss移除
                 bigBoss.remove();
+                //爆炸声音
+                // $('#bomb')[0].currentTime=0;
+                $('#bomb')[0].play();
                 //爆炸图片
                 var bomb = getBitmap(imgList['bomb']);
                 bomb.scaleX = 4; //爆炸图片扩大2倍
@@ -193,7 +202,7 @@ function bullet(type,x,w,y,time,offsetX,delay){
 				//如果敌机生命值小于0
 				if(germGroup[i].life<=0){
 					//爆炸声音
-                    $('#bomb')[0].currentTime=0;
+                    // $('#bomb')[0].currentTime=0;
 					$('#bomb')[0].play();
 
 					//爆炸图片
@@ -206,16 +215,20 @@ function bullet(type,x,w,y,time,offsetX,delay){
                         //移除
                         bomb.remove();
                     }});
-					//加分
-                    scoreText.childList["0"].text= parseInt(scoreText.childList["0"].text)+germGroup[i].score;
-                    //得分
-                    var germText = new setText(germGroup[i].x+(germGroup[i].getWidth()-36)/2,germGroup[i].y,36,"+"+germGroup[i].score,"#fcfdff");
-                    weaponLayer.addChild(germText);
-                    //弹出加分面板
-                    LTweenLite.to(germText,0.2,{y:germGroup[i].y-20,onComplete:function () {
-                            //文字面板移除
-                            germText.remove();
-                    }});
+                    if(germGroup[i].noScore==false)
+                    {
+                        //加分
+                        scoreText.childList["0"].text= parseInt(scoreText.childList["0"].text)+germGroup[i].score;
+                        //得分
+                        var germText = new setText(germGroup[i].x+(germGroup[i].getWidth()-36)/2,germGroup[i].y,36,"+"+germGroup[i].score,"#fcfdff");
+                        weaponLayer.addChild(germText);
+                        //弹出加分面板
+                        LTweenLite.to(germText,0.2,{y:germGroup[i].y-20,onComplete:function () {
+                                //文字面板移除
+                                germText.remove();
+                        }});
+                    }
+
                     //移除动画
                     LTweenLite.remove(germGroup[i].rotateBody);
 					//移除事件
@@ -244,6 +257,9 @@ function bullet(type,x,w,y,time,offsetX,delay){
                 self.die();
                 //移除子弹
                 self.remove();
+                //爆炸声音
+                // $('#bomb')[0].currentTime=0;
+                $('#bomb')[0].play();
                 //爆炸图片
                 var bomb = getBitmap(imgList['bomb']);
                 bomb.x = self.x; //爆炸位置x
@@ -267,7 +283,7 @@ function bullet(type,x,w,y,time,offsetX,delay){
 }
 
 //细菌
-function enemy(x,y,time,id){
+function enemy(x,y,time,id,noScore){
     /*
      * x为细菌横坐标
      * y为细菌横坐标
@@ -281,6 +297,7 @@ function enemy(x,y,time,id){
     self.y = y; //纵坐标
     self.life = 1000; //细菌生命
 	self.score = 10*id; //细菌分数
+    self.noScore = noScore; //没有分数
     self.addChild(self.bitmap); //图片
 	self.moveOut = false; //细菌是否出界
     //细菌运动
@@ -311,6 +328,9 @@ function enemy(x,y,time,id){
             self.die();
             //移除敌机
             self.remove();
+            //爆炸声音
+            // $('#bomb')[0].currentTime=0;
+            $('#bomb')[0].play();
             //飞机移除
             player.remove();
             //移除palyLayer的每帧监听
@@ -431,15 +451,18 @@ function clearWeapon(x,y) {
 			if(germGroup[i].moveOut==false)
 			{
                 LTweenLite.remove(germGroup[i].rotateBody);
-                //加分
-                scoreText.childList["0"].text= parseInt(scoreText.childList["0"].text)+germGroup[i].score;
-                //得分
-                var germText = new setText(germGroup[i].x+(germGroup[i].getWidth()-36)/2,germGroup[i].y,36,"+"+germGroup[i].score,"#fcfdff");
-                scoreLayer.addChild(germText);
-                //得分动画
-                LTweenLite.to(germText,0.2,{y:germGroup[i].y-20,onComplete:function () {
-                        scoreLayer.removeAllChild();
-                    }});
+                if(germGroup[i].noScore==false)
+                {
+                    //加分
+                    scoreText.childList["0"].text= parseInt(scoreText.childList["0"].text)+germGroup[i].score;
+                    //得分
+                    var germText = new setText(germGroup[i].x+(germGroup[i].getWidth()-36)/2,germGroup[i].y,36,"+"+germGroup[i].score,"#fcfdff");
+                    scoreLayer.addChild(germText);
+                    //得分动画
+                    LTweenLite.to(germText,0.2,{y:germGroup[i].y-20,onComplete:function () {
+                            scoreLayer.removeAllChild();
+                        }});
+                }
 			}
             //移除事件
             germGroup[i].removeEventListener(LEvent.ENTER_FRAME);
@@ -453,6 +476,9 @@ function clearWeapon(x,y) {
 
             i--;
 		}
+        //爆炸声音
+        // $('#bomb')[0].currentTime=0;
+        $('#bomb')[0].play();
 		//如果魔法瓶数量为0
         if(weaponNumber	==0)
 		{
@@ -480,7 +506,7 @@ function Boss(x,y) {
     self.bitmap[0].visible = true; //显示第一张
     self.x = x; //横坐标
     self.y = y; //纵坐标
-    self.life = 60000; //大boss为血量
+    self.life = 10000; //大boss为血量
     self.val =  self.life; //记录最大量
 	self.hit = new LSprite(); //碰撞层
 	self.hit.y = -10; //碰撞层纵坐标

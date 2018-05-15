@@ -16,8 +16,15 @@ var bigBoss;
 var GameOpen = false;
 var bossButtles = [];
 //图片
+
+
+
 var imgAll = [
-	{path:url+'img/long.png',type:'img',name:'long'},//我方飞机
+    {path:url+'img/music.png',type:'img',name:'music'},//我方飞机
+	{path:url+'img/long0.png',type:'img',name:'long0'},//我方飞机
+    {path:url+'img/long1.png',type:'img',name:'long1'},//我方飞机
+    {path:url+'img/long2.png',type:'img',name:'long2'},//我方飞机
+    {path:url+'img/long3.png',type:'img',name:'long3'},//我方飞机
     {path:url+'img/bullet1.png',type:'img',name:'bullet1'},//子弹1
     {path:url+'img/bullet2.png',type:'img',name:'bullet2'},//子弹2
     {path:url+'img/bullet3.png',type:'img',name:'bullet3'},//子弹3

@@ -164,7 +164,7 @@
 			<!--显示填写地址-->
 			<iframe src="address.html" id="addressFrame" class="pw" v-if="addressShow==1"></iframe>
 			<!--显示摇奖-->
-			<iframe src="award.html" id="addressFrame" class="pw" v-show="pageIndex==6"></iframe>
+			<iframe src="award.html" id="awardFrame" class="pw" v-show="pageIndex==6"></iframe>
 			<!--选择英雄-->
 			<div id="choice" class="pw" v-show="pageIndex==5">
 				<div class="choiceTitle animated bounceInDown">
@@ -214,8 +214,8 @@
 		</div>
 
 		<audio id="bomb" src="music/bomb.mp3" hidden="hidden" preload ></audio>
-		
-		
+		<audio id="bg" src="music/sound-bg.mp3" hidden="hidden" loop="loop" autoplay="autoplay" preload ></audio>
+		<img src="img/music.png" id="music">
 		<script>
             $('.img').on('click',function () {
 				return false;
@@ -284,9 +284,9 @@
 				},
                 methods:{
                     //开始游戏
-                    startBtn(){
+                    startBtn :function(){
                         var self = this;
-						gameStart();
+
                         self.pageIndex = 5;
 						// gameTips();
 						setTimeout(function () {
@@ -304,6 +304,7 @@
                                     $('.confirm').on('touchstart',function () {
                                         self.pageIndex = 3;
 										gameTips();
+                                        gameStart();
                                     });
                                 },
                                 onSlideChangeEnd: function(swiper){
@@ -313,7 +314,7 @@
                         },100);
 					},
                     //显示规则
-                    showRules(){
+                    showRules:function(){
 						$('#rule').remove();
 						var html = "";
 						html += '<div id="rule" class="pw mask">';
@@ -332,7 +333,7 @@
 					},
 					
 					//查看详情
-					lookDetails(src,content,name,phone,address,msg){
+					lookDetails:function(src,content,name,phone,address,msg){
                         $('#lookAddress').remove();
                         var html = "";
                         html += '<div id="lookAddress" class="pw mask"><div class="lookAddress animated bounceInDown"><img src="img/person.png" />';
@@ -358,7 +359,7 @@
 				}
             });
             audioAutoPlay('bomb',0);
-
+            audioAutoPlay('bg');
 
 		</script>
 		<div class="delete2"></div>

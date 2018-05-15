@@ -33,7 +33,7 @@ $(function(){
 			callback:function (){
 				
 				//旋转完成调用的函数
-				alert(txt.giftCode);
+				parent.getGameGift();
 				//开启旋转
 				turnplate.bRotate = !turnplate.bRotate;
 			}
