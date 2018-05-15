@@ -37,10 +37,10 @@ function music(){
 
 function startGame(res){
 	imgList = res;
-    // app.pageIndex = 4;
-    // showStory();
-    app.pageIndex = 3;
-    gameStart();
+    app.pageIndex = 4;
+    showStory();
+    // app.pageIndex = 3;
+    // gameStart();
     // GameOpen = true;
 }
 function showStory() {
@@ -67,10 +67,14 @@ function gameStart(){
     LTweenLite.pauseAll();
     backLayer.removeAllChild();
     backLayer.die();
-    backLayer.addChild(getBitmap(imgList['game1']))
+    backLayer.addChild(getBitmap(imgList['game1']));
+    /////////////////////////////////重置参数////////////////////////////////////////
 	//清屏武器层
     weaponLayer = new LSprite();
     backLayer.addChild(weaponLayer);
+    weaponLayer.die();
+    weaponLayer.removeAllChild();
+    //魔法瓶数量
 	magicText = new setText(710,1120,30,'x1',"#ffffff","true");
     backLayer.addChild(magicText);
     magicText.visible = false;
@@ -79,153 +83,204 @@ function gameStart(){
     backLayer.addChild(scoreLayer);
 	//飞机层
    	palyLayer = new LSprite();
+    palyLayer.die();
+    palyLayer.removeAllChild();
     backLayer.addChild(palyLayer);
     //龙宝
     player = new myPlane(350,1000,10000);
     palyLayer.addChild(player);
-   	//细菌层
-    var efps = 0;//控制细菌出现频率
-    var en = 0;//控制魔法出现在时间
-    var ix = 0;
+    ////////////////////////////////////////////-得分面板-//////////////////////////////////////////////////////
+    scoreText = new setText(640,30,30,'0',"#ffffff","true");
+    backLayer.addChild(scoreText);
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //细菌层
 	enemyLayer = new LSprite();
     backLayer.addChild(enemyLayer);
+    enemyLayer.die();
+    enemyLayer.removeAllChild();
+    ////////////////////////////////////////////-boss是否出现在-///////////////////////////////////////////////////
+    var bossShow = false; //大boss出现
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////Boss操作/////////////////////////////////////////////////////
-    bigBoss = new Boss(210,20);
+    bigBoss = new Boss(210,20);     //添加大boss
+    bigBoss.visible = false;
+    bigBoss.y = -bigBoss.getHeight()*2; //纵位置y
     var bigEFP = 0;
     var bigN = 0;//出现小怪的数量
-    enemyLayer.addChild(bigBoss);
-    var difficult = 40;//难度
-    var timeBoss = LTweenLite.to(bigBoss,1.0,{x:20,loop:true}).to(bigBoss,1.0,{x:400,loop:true});
-    var bossMove;
-    var listClear = false;
+
+    var difficult = 30;//难度
+
+    var bossMove; //移动路径
+    var listClear = false; //不让路径重复渲染
+    var timeBoss; //大boss左右移动
+    //大boss每帧监听函数
     bigBoss.addEventListener(LEvent.ENTER_FRAME,function () {
-        bigEFP++;
-		if(bigBoss.hitTestObject(player))
+    	if(bossShow==true&&bigBoss.frame==true);
 		{
-            bigBoss.remove();
-            palyLayer.removeEventListener(LEvent.ENTER_FRAME);
-            bigBoss.removeEventListener(LEvent.ENTER_FRAME);
-            enemyLayer.removeEventListener(LEvent.ENTER_FRAME);
-            LTweenLite.pauseAll();
-		}
-        //检测大boss的伤亡情况
-        if(bigBoss.life<bigBoss.val*1/4){
-            bigBoss.bitmap[3].visible = false;
-            bigBoss.bitmap[4].visible = true;
-        }else if(bigBoss.life<bigBoss.val*2/4){
-            bigBoss.bitmap[2].visible = false;
-            bigBoss.bitmap[3].visible = true;
-        }else if(bigBoss.life<bigBoss.val*3/4){
-            bigBoss.bitmap[1].visible = false;
-            bigBoss.bitmap[2].visible = true;
-        }else if(bigBoss.life<bigBoss.val*5/6)
-        {
-            bigBoss.bitmap[0].visible = false;
-            bigBoss.bitmap[1].visible = true;
-        }
-        if(bigEFP%difficult==0) {
-            bigN++;
-            //出现魔法药水
-            if(bigN%10==0)
+			bigEFP++;
+			if(bigBoss.hitTestObject(player))
 			{
-				var ix = 50+ parseInt(Math.random()*590);
-                var index = magicGroup.length;
-                magicGroup[index] = new weapon(ix,-92,4,parseInt(Math.random()*2)+2);
-                enemyLayer.addChild(magicGroup[index]);
-			}
-			//大佬行为
-            if(parseInt(bigN/10)%3==1)
-            {
-                var index = bossButtles.length;
-                listClear = false;
-                if(bossMove)
-                {
-                    bossMove.pause();
-                }
-                timeBoss.resume();
-                bossButtles[index] = new bossBullet(bigBoss.x,bigBoss.getWidth(),bigBoss.y+bigBoss.getHeight(),1,player.x+player.getWidth()/2)
-                palyLayer.addChild(bossButtles[index]);
-			}else if(parseInt(bigN/10)%3==0){
-                var index = germGroup.length;
-                listClear = false;
-                if(bossMove)
-				{
-                    bossMove.pause();
-				}
-                timeBoss.resume();
-                germGroup[index] = new enemy(bigBoss.x, bigBoss.getHeight(), 1.5, parseInt(Math.random() * 3) + 1);
-                enemyLayer.addChild(germGroup[index]);
-                var index = germGroup.length;
-                germGroup[index] = new enemy(bigBoss.x+200, bigBoss.getHeight(), 1.5, parseInt(Math.random() * 3) + 1);
-                enemyLayer.addChild(germGroup[index]);
-			}else{
-            	var list = [];
-            	if(listClear == false)
-				{
-                    listClear = true;
-                    timeBoss.pause();
-                    var cx = bigBoss.x;
-                    var cy = bigBoss.y;
-                    list.push(new LPoint(cx,cy));
-                    list.push(new LPoint(0,403));
-                    list.push(new LPoint(player.x,player.y-bigBoss.getHeight()+player.getHeight()));
-                    list.push(new LPoint(420,450));
-                    list.push(new LPoint(cx,cy));
-                    bossMove = LTweenLite.to(bigBoss,2.5,{coordinate:list,loop:true,onComplete:function () {
-                    	list[3] = new LPoint(player.x,player.y-bigBoss.getHeight()+player.getHeight());
+
+				//飞机移除
+				player.remove();
+				//移除palyLayer的每帧监听
+				palyLayer.removeEventListener(LEvent.ENTER_FRAME);
+				//移除enemyLayer的每帧监听
+				enemyLayer.removeEventListener(LEvent.ENTER_FRAME);
+				//移除bigBoss的每帧监听
+				bigBoss.removeEventListener(LEvent.ENTER_FRAME);
+				//移除动画事件
+				LTweenLite.pauseAll();
+				//爆炸图片
+				var bomb = getBitmap(imgList['bomb']);
+				bomb.scaleX = 2; //爆炸图片扩大2倍
+				bomb.scaleY = 2; //爆炸图片扩大2倍
+				bomb.x = (player.x +(player.getWidth()-bomb.getWidth())/2); //爆炸位置x
+				bomb.y = (player.y +(player.getHeight()-bomb.getHeight())/2); //爆炸位置y
+				weaponLayer.addChild(bomb); //添加图片
+				//爆炸效果
+				LTweenLite.to(bomb,0.5,{alpha:0,onComplete:function () {
+						//爆炸移除
+						bomb.remove();
+						//游戏失败
+						gameFail(scoreText.childList["0"].text,"http://www.baidu.com");
 					}});
+			}
+			//检测大boss的伤亡情况
+			if(bigBoss.life<bigBoss.val*1/4){
+				bigBoss.bitmap[3].visible = false;
+				bigBoss.bitmap[4].visible = true;
+			}else if(bigBoss.life<bigBoss.val*2/4){
+				bigBoss.bitmap[2].visible = false;
+				bigBoss.bitmap[3].visible = true;
+			}else if(bigBoss.life<bigBoss.val*3/4){
+				bigBoss.bitmap[1].visible = false;
+				bigBoss.bitmap[2].visible = true;
+			}else if(bigBoss.life<bigBoss.val*5/6)
+			{
+				bigBoss.bitmap[0].visible = false;
+				bigBoss.bitmap[1].visible = true;
+			}
+			if(bigEFP%difficult==0) {
+				bigN++;
+				//出现魔法药水
+				if(bigN%10==0)
+				{
+					var ix = 50+ parseInt(Math.random()*590);
+					var index = magicGroup.length;
+					magicGroup[index] = new weapon(ix,-92,4,parseInt(Math.random()*2)+2);
+					enemyLayer.addChild(magicGroup[index]);
+				}
+				//大佬行为
+				if(parseInt(bigN/10)%3==1)
+				{
+					var index = bossButtles.length;
+					listClear = false;
+					if(bossMove)
+					{
+						bossMove.pause();
+					}
+					timeBoss.resume();
+					bossButtles[index] = new bossBullet(bigBoss.x,bigBoss.getWidth(),bigBoss.y+bigBoss.getHeight(),1,player.x+player.getWidth()/2)
+					palyLayer.addChild(bossButtles[index]);
+				}else if(parseInt(bigN/10)%3==0){
+					var index = germGroup.length;
+					listClear = false;
+					if(bossMove)
+					{
+						bossMove.pause();
+					}
+					timeBoss.resume();
+					germGroup[index] = new enemy(bigBoss.x, bigBoss.getHeight(), 1.5, parseInt(Math.random() * 3) + 1);
+					enemyLayer.addChild(germGroup[index]);
+					var index = germGroup.length;
+					germGroup[index] = new enemy(bigBoss.x+200, bigBoss.getHeight(), 1.5, parseInt(Math.random() * 3) + 1);
+					enemyLayer.addChild(germGroup[index]);
+				}else{
+					var list = [];
+					if(listClear == false)
+					{
+						listClear = true;
+						timeBoss.pause();
+						var cx = bigBoss.x;
+						var cy = bigBoss.y;
+						list.push(new LPoint(cx,cy));
+						list.push(new LPoint(0,403));
+						list.push(new LPoint(player.x,player.y-bigBoss.getHeight()+player.getHeight()));
+						list.push(new LPoint(420,450));
+						list.push(new LPoint(cx,cy));
+						bossMove = LTweenLite.to(bigBoss,2.5,{coordinate:list,loop:true,onComplete:function () {
+							list[3] = new LPoint(player.x,player.y-bigBoss.getHeight()+player.getHeight());
+						}});
+					}
 				}
 			}
         }
     });
-    /////////////////////////////////////////////////////Boss操作/////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////Boss操作//////////////////////////////////////////////
+    //////////////////////////////////////////////////////-细菌出现-/////////////////////////////////////////////
+    var efps = 0; //控制细菌出现频率
+    var en = 0; //控制魔法出现在时间
+    var ix = 0; //小怪出现的位置
+
     enemyLayer.addEventListener(LEvent.ENTER_FRAME,function () {
-    	if(GameOpen==true){
+    	if(GameOpen==true&&bossShow==false){
            efps++;
-           if(efps%20==0)
-		 {
-               efps = 1;
+
+            if(efps == 1001)
+			{
+                console.log(1);
+                enemyLayer.removeEventListener(LEvent.ENTER_FRAME);
+                // bossShow = true;
+                // bigBoss.visible = true;
+                // enemyLayer.addChild(bigBoss);
+                // LTweenLite.toLocaleString(bigBoss,0.5,{y:20,onComplete:function () {
+                //         timeBoss  = LTweenLite.to(bigBoss,1.0,{x:20,loop:true}).to(bigBoss,1.0,{x:400,loop:true});
+                // }});
+			}else if(efps%20==0)
+           {
+
                en++;
-          
-		 	if(ix<=110)
-		 	{
-		 		ix=Math.random()*(530-ix);
-		 	}else if(ix>530){
-		 		ix=ix-Math.random()*ix;
-		 	}
-		 	else{
-		 		if(Math.random()<0.5)
-		 		{
-                       ix=ix+110+(530-ix)*Math.random();
-		 		}else{
-                       ix=(ix-110)*Math.random();
-		 		}
-		 	}
-		 	if(en==20)
-		 	{
-                   en = 0;
-                   var index = magicGroup.length;
-                   magicGroup[index] = new weapon(ix,-92,4,parseInt(Math.random()*3)+2);
-                   // magicGroup[index] = new weapon(ix,-92,4,4);
-                   enemyLayer.addChild(magicGroup[index]);
-		 	}else{
-                   var index = germGroup.length;
-                   germGroup[index] = new enemy(ix,-92,4,parseInt(Math.random()*3)+1);
-                   enemyLayer.addChild(germGroup[index]);
-		 	}
-          
+
+			   if(ix<=110)
+			   {
+					ix=Math.random()*(530-ix);
+			   }else if(ix>530){
+					ix=ix-Math.random()*ix;
+			   }
+			   else{
+					if(Math.random()<0.5)
+					{
+						ix=ix+110+(530-ix)*Math.random();
+					}else{
+						ix=(ix-110)*Math.random();
+					}
+			   }
+			   if(en==20)
+			   {
+					en = 0;
+					var index = magicGroup.length;
+					magicGroup[index] = new weapon(ix,-92,4,parseInt(Math.random()*3)+2);
+				   enemyLayer.addChild(magicGroup[index]);
+				}else{
+					var index = germGroup.length;
+					germGroup[index] = new enemy(ix,-92,4,parseInt(Math.random()*3)+1);
+					enemyLayer.addChild(germGroup[index]);
+				}
            }
 		}
     });
-
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////-子弹飞-/////////////////////////////////////////////
-    var fps = 0;
+    var fps = 0;//控制子弹发射的频率
     palyLayer.addEventListener(LEvent.ENTER_FRAME,function(){
-    	if(GameOpen==false){
+    	//如果游戏开始
+    	if(GameOpen==true){
 	    	fps++;
 	    	if(fps%10==0)
 	    	{
 	    		fps=1;
+	    		//子弹类型
 	    		switch (player.bulletType)
 				{
 					case 1:
@@ -270,8 +325,5 @@ function gameStart(){
     	}
 	});
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////-得分面板-//////////////////////////////////////////////////////
-    scoreText = new setText(640,30,30,'0',"#ffffff","true");
-    backLayer.addChild(scoreText);
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 }

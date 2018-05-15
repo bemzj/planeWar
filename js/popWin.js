@@ -73,7 +73,7 @@ function gameSuccess(score){
 	});
 }
 //游戏失败
-function gameFail(score,src){
+function gameFail(score,links){
 	$('#fail').remove();
 	var html = "";
 	html +='<div id="fail" class="pw mask" ><div class="fail1 animated bounceInDown">';
@@ -96,7 +96,7 @@ function gameFail(score,src){
 	});
 	//链接
 	$('.fail5 a').one('touchstart',function(){
-		window.location.href = src;
+		window.location.href = links;
 	});
 }
 //激活失败
