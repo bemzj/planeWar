@@ -180,14 +180,20 @@ function gameTips(){
                 setTimeout(function () { 
                 	var tNumber = 3;
                     $('#gameRule .timeCount').show().addClass('tFrame');
+                    $('#three')[0].play();
                     var time = setInterval(function(){ 	
                     	--tNumber;
                     	if(tNumber==0)
                     	{
-                    		$('#gameRule .timeCount').find('p').text('GO');
+                    		$('#gameRule .timeCount').find('p').text('Ready');
+                            $('#zero')[0].play();
                     	}else if(tNumber==-1)
+                        {
+                            $('#gameRule .timeCount').find('p').text('GO');
+                        }else if(tNumber==-2)
                     	{
                     		clearInterval(time);
+                            $('#gameRule .timeCount').hide();
                     		$('#gameRule .timeCount').show().removeClass('tFrame')
                     		$('#gameRule').remove();
                     		GameOpen=true;

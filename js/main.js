@@ -322,11 +322,11 @@ function gameStart(){
     palyLayer.addEventListener(LMouseEvent.MOUSE_MOVE,function (event){
     	if(player.canMove==true)
     	{
-    		if(event.offsetX-xs>0&&event.offsetX-xs<630)
+    		if(event.offsetX-xs>0&&event.offsetX-xs<750-player.getWidth())
 	    	{
 	    		player.x = event.offsetX-xs;
 	    	}
-	    	if(event.offsetY-ys>0&&event.offsetY-ys<1042)
+	    	if(event.offsetY-ys>0&&event.offsetY-ys<1206-player.getHeight())
 	    	{
 	    		player.y = event.offsetY-ys;
 	    	}

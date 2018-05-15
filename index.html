@@ -215,6 +215,8 @@
 
 		<audio id="bomb" src="music/bomb.mp3" hidden="hidden" preload ></audio>
 		<audio id="bg" src="music/sound-bg.mp3" hidden="hidden" loop="loop" autoplay="autoplay" preload ></audio>
+		<audio id="three" src="music/three.wav" hidden="hidden"  preload ></audio>
+		<audio id="zero" src="music/zero.wav" hidden="hidden"  preload ></audio>
 		<img src="img/music.png" id="music">
 		<script>
             $('.img').on('click',function () {
@@ -359,6 +361,8 @@
 				}
             });
             audioAutoPlay('bomb',0);
+            audioAutoPlay('three',0);
+            audioAutoPlay('zero',0);
             audioAutoPlay('bg');
 
 		</script>

@@ -90,7 +90,9 @@
             });
         }();
         //失去焦点避免软键盘弹出
-        $('#city').blur();
+        $('#city').on('click',function () {
+            $(this).blur();
+        });
         //提交
         $('.submitAddress').on('click',function () {
             showPop(2,"请您认真核对信息，如信息填写有误，将无法领取奖品！",function () {
